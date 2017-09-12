@@ -6,3 +6,5 @@ server/.DS_Store
 test-app/node_modules
 test-app/package-lock.json
 test-app/.DS_Store
+b.js/node_modules
+.DS_Store
