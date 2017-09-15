@@ -11,10 +11,9 @@ export function mapStateToProps({ names }: StoreState) {
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.NamesActions>) {
   return {
-    addName: (name: string) => {
-      dispatch(actions.addNewName(name))
-    },
+    addName: (name: string) => dispatch(actions.addNewName(name)),
     removeName: (name: string) => dispatch(actions.removeName(name)),
+    sortNames: () => dispatch(actions.sortNames())
   };
 };
 

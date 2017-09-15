@@ -1,14 +1,17 @@
 import * as React from "react";
 
-export function Name({ name, removeName }: any) {
-  const onClick = () => {
-    console.log(name)
+export class Name extends React.Component<any, any> {
+  onClick = () => {
+    const { removeName, name } = this.props;
     removeName && removeName(name)
   };
-  return (
-    <div>
-      <span>This name is {name} :)</span>
-      <button onClick={onClick}>Remove Name</button>
-    </div>
-  );
+  render() {
+    const {name} = this.props
+    return (
+      <div>
+        <span>This name is {name} :)</span>
+        <button onClick={this.onClick}>Remove Name</button>
+      </div>
+    );
+  }
 };

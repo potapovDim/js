@@ -1,6 +1,6 @@
 
 import { NamesActions } from './actions';
-import { StoreState, ADD_NEW_NAME, REMOVE_NAME } from './constans';
+import { StoreState, ADD_NEW_NAME, REMOVE_NAME, SORT_NAMES } from './constans';
 
 export function names(state: StoreState, action: NamesActions): StoreState {
   switch(action.type) {
@@ -8,8 +8,10 @@ export function names(state: StoreState, action: NamesActions): StoreState {
       return { ...state, names: [...state.names, action.name] };
     }
     case REMOVE_NAME: {
-      // console.log('!!!!!!', action.name)
       return { ...state, names: state.names.filter(name => name != action.name) };
+    }
+    case SORT_NAMES: {
+      return { ...state, names: [...state.names.sort()] };
     }
     default:
       return { names: [] };
