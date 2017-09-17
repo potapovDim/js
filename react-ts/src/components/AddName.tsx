@@ -20,7 +20,7 @@ export class AddName extends React.Component<any, any> {
     return (
       <div>
         <span>Enter new name :)</span>
-        <input onChange={this.onChange} value={this.state.currentName}></input>
+        <input className="name" onChange={this.onChange} value={this.state.currentName}></input>
         <button onClick={this.addName}>Add new name</button>
       </div>
     );

@@ -9,7 +9,7 @@ export class Name extends React.Component<any, any> {
     const {name} = this.props
     return (
       <div>
-        <span>This name is {name} :)</span>
+        <span className="span">This name is {name} :)</span>
         <button onClick={this.onClick}>Remove Name</button>
       </div>
     );

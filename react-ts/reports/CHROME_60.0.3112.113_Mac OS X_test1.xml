@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="3">
+
+  <testsuite name="test1"
+    errors="0" failures="0" hostname="" id="" package="test1" skipped="0"
+    tests="3" time="5.873" timestamp="Sun, 17 Sep 2017 08:13:13 GMT">
+  
+    <testcase name="Success add name" classname="test1" time="1.775" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Empty value" classname="test1" time="1.504" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Huge value" classname="test1" time="2.594" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>
