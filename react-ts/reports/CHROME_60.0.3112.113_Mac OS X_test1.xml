@@ -5,23 +5,39 @@
 
   <testsuite name="test1"
     errors="0" failures="0" hostname="" id="" package="test1" skipped="0"
-    tests="3" time="5.873" timestamp="Sun, 17 Sep 2017 08:13:13 GMT">
+    tests="3" time="11.55" timestamp="Mon, 18 Sep 2017 14:35:31 GMT">
   
-    <testcase name="Success add name" classname="test1" time="1.775" assertions="2">
+    <testcase name="Success add name" classname="test1" time="2.065" assertions="4">
+
+    
+
+    
 
     
 
     
     </testcase>
   
-    <testcase name="Empty value" classname="test1" time="1.504" assertions="2">
+    <testcase name="Empty value" classname="test1" time="6.814" assertions="6">
+
+    
+
+    
+
+    
+
+    
 
     
 
     
     </testcase>
   
-    <testcase name="Huge value" classname="test1" time="2.594" assertions="2">
+    <testcase name="Huge value" classname="test1" time="2.673" assertions="4">
+
+    
+
+    
 
     
 

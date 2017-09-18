@@ -11,7 +11,11 @@ export function names(state: StoreState, action: NamesActions): StoreState {
       return { ...state, names: state.names.filter(name => name != action.name) };
     }
     case SORT_NAMES: {
-      return { ...state, names: [...state.names.sort()] };
+      return {
+        ...state, names: [...state.names.sort((a: any, b: any) => {
+          return a.toLowerCase() > b.toLowerCase() ? 1 : a.toLowerCase() < b.toLowerCase() ? -1 : 0
+        })]
+      };
     }
     default:
       return { names: [] };

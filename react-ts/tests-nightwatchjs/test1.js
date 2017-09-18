@@ -1,38 +1,91 @@
 module.exports = {
   'Success add name': function (browser) {
-    const input = 'input';
-    const button = 'button';
+    const firstName = 'input[placeholder="firstname"]';
+    const lastName = 'input[placeholder="lastname"]';
     const text = 'span';
-    const addNammeButton = 'button:nth-child(3)'
-    const testValue = 'test 1'
+    const button = 'button';
+    const testFirstName = 'TestFirstName';
+    const testLastName = 'TestLastName';
+
     browser.url('http://localhost:9090')
       .waitForElementPresent('body', 1500)
-      .setValue('.name', testValue)
-      .click(addNammeButton)
-      .getText('.span', function (result)  {
-        this.assert.equal(result.value.includes(testValue), true);
+      .setValue(firstName, testFirstName)
+      .setValue(lastName, testLastName)
+      .click('button')
+      .elements('css selector', text, (result) => {
+        browser.assert.ok(result.value.length == 2);
+        browser.elementIdText(result.value[1].ELEMENT, (text) => {
+          browser.assert.ok(text.value.includes(testFirstName) && text.value.includes(testLastName))
+        });
       })
-    .end();
+      .elements('css selector', button, (result) => {
+        browser.assert.ok(result.value.length == 3);
+        browser.elementIdClick(result.value[2].ELEMENT);
+      })
+      .end();
   },
   'Empty value': function (browser) {
-    const addNammeButton = 'button:nth-child(3)'
-    const testValue = ''
+    const firstName = 'input[placeholder="firstname"]';
+    const lastName = 'input[placeholder="lastname"]';
+    const text = 'span';
+    const button = 'button';
+    const testFirstName = 'TestFirstName';
+    const testLastName = 'TestLastName';
+
     browser.url('http://localhost:9090')
-    .waitForElementPresent('body', 1500)
-    .setValue('.name', testValue)
-    .click(addNammeButton)
-    .waitForElementNotPresent('.span', 1000)
-  .end();
+      .waitForElementPresent('body', 1500)
+      .setValue(firstName, '')
+      .click('button')
+      .elements('css selector', button, (result) => {
+        browser.assert.ok(result.value.length == 1);
+      })
+      .setValue(firstName, testFirstName)
+      .setValue(lastName, '')
+      .click('button')
+      .elements('css selector', button, (result) => {
+        browser.assert.ok(result.value.length == 1);
+      })
+      .setValue(firstName, testFirstName)
+      .setValue(lastName, testLastName)
+      .click('button')
+      .elements('css selector', text, (result) => {
+        browser.assert.ok(result.value.length == 2);
+        browser.elementIdText(result.value[1].ELEMENT, (text) => {
+          browser.assert.ok(text.value.includes(testFirstName) && text.value.includes(testLastName))
+        });
+      })
+      .elements('css selector', button, (result) => {
+        browser.assert.ok(result.value.length == 3);
+        browser.elementIdClick(result.value[2].ELEMENT);
+      })
+      .end();
   },
   'Huge value': function (browser) {
-    const addNammeButton = 'button:nth-child(3)'
-    const testValue = '12345678901234567890123456'
+    const firstName = 'input[placeholder="firstname"]';
+    const lastName = 'input[placeholder="lastname"]';
+    const text = 'span';
+    const button = 'button';
+    const testFirstName = 'TestFirstNameTestFirstName';
+    const testLastName = 'TestLastNameTestLastNameNe';
+
     browser.url('http://localhost:9090')
-    .waitForElementPresent('body', 1500)
-    .setValue('.name', testValue)
-    .click(addNammeButton)
-    .waitForElementNotPresent('.span', 1000)
-  .end();
+      .waitForElementPresent('body', 1500)
+      .setValue(firstName, testFirstName)
+      .setValue(lastName, '')
+      .click('button')
+      .elements('css selector', button, (result) => {
+        browser.assert.ok(result.value.length == 1);
+      })
+      .setValue(lastName, testLastName)
+      .click('button')
+      .elements('css selector', text, (result) => {
+        browser.assert.ok(result.value.length == 1);
+      })
+      .setValue(lastName, testLastName)
+      .click('button')
+      .elements('css selector', button, (result) => {
+        browser.assert.ok(result.value.length == 1);
+      })
+      .end();
   }
 };
-
