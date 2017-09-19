@@ -5,7 +5,7 @@ export class AddName extends React.Component<any, any> {
   state = {
     currentFirstName: '',
     currentLastNme: ''
-  }
+  };
   onChange = (part: string, e: any) => {
     part == 'first' ? this.setState({ currentFirstName: e.target.value }) : this.setState({ currentLastNme: e.target.value });
   };
@@ -34,8 +34,14 @@ export class AddName extends React.Component<any, any> {
     return (
       <div>
         <span>Enter new name :)</span>
-        <input className={inputStyle} onChange={this.onChange.bind(this, 'first')} value={this.state.currentFirstName} placeholder="firstname"></input>
-        <input className={inputStyle} onChange={this.onChange.bind(this, 'last')} value={this.state.currentLastNme} placeholder="lastname"></input>
+        <input 
+          className={inputStyle}
+          onChange={this.onChange.bind(this, 'first')}
+          value={this.state.currentFirstName} placeholder="firstname"></input>
+        <input 
+          className={inputStyle}
+          onChange={this.onChange.bind(this, 'last')}
+          value={this.state.currentLastNme} placeholder="lastname"></input>
         <button className={buttonStyle} onClick={this.addName}>Add new name</button>
       </div>
     );

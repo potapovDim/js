@@ -1,7 +1,8 @@
 import * as constants from './constans'
 
 export interface SortNames {
-    type: constants.SORT_NAMES
+    type: constants.SORT_NAMES;
+    directive: string;
 }
 export interface AddNewName {
     type: constants.ADD_NEW_NAME;
@@ -23,9 +24,10 @@ export function removeName(name: string): RemoveName {
 };
 
 
-export function sortNames(): SortNames {
+export function sortNames(directive: string): SortNames {
     return {
-        type: constants.SORT_NAMES
+        type: constants.SORT_NAMES,
+        directive
     }
 }
 
