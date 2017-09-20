@@ -7,9 +7,8 @@ type TYPE = typeof TYPE;
 
 
 const dragdSource = {
-  beginDrag: function (props: any) {
-    console.log('begin drag')
-    return {};
+  beginDrag: function (props: any, monitor: any, component: any) {
+    return { component: component.state.component };
   },
 
   isDragging: function (props: any, monitor: any) {
@@ -18,7 +17,6 @@ const dragdSource = {
 
   endDrag: function (props: any, monitor: any, component: any) {
     const item = monitor.getItem();
-
     const dropResult = monitor.getDropResult();
   }
 };
@@ -31,6 +29,9 @@ function collect(connect: any, monitor: any) {
 }
 
 class DragItem extends React.Component<any, any> {
+  state = {
+    component: 'red'
+  }
   render() {
     const { connectDragSource } = this.props;
     return connectDragSource(<div className={style({

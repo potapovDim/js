@@ -37,13 +37,13 @@ class Names extends React.Component<any, any> {
                 color: 'green'
             }
         });
-        const { names, addName, removeName } = this.props;
+        const { names: { names }, addName, removeName, addItem } = this.props;
         return (
             <div className={style({ display: 'flex' })}>
                 <div className={style({ flex: 1 })}>
                     <h1 >Names list, names count is {names.length}</h1>
                     <AddName addName={addName} />
-                    <DropZone />
+                    <DropZone {...this.props} />
                     <DragItem />
                 </div>
                 <div className={style({ flex: 1 })}>

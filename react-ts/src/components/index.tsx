@@ -1,19 +1,22 @@
 import Names from './Names';
-import * as actions from '../reducers/names/actions';
+import * as actionsName from '../reducers/names/actions';
+import * as actionsItem from '../reducers/items/actions';
 import { StoreState } from '../reducers/names/constans';
 import { connect, Dispatch } from 'react-redux';
 
-export function mapStateToProps({ names }: StoreState) {
+export function mapStateToProps({ names, items }: any) {
   return {
-    names
+    names,
+    items
   };
 };
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.NamesActions>) {
+export function mapDispatchToProps(dispatch: Dispatch<any>) {
   return {
-    addName: (name: string) => dispatch(actions.addNewName(name)),
-    removeName: (name: string) => dispatch(actions.removeName(name)),
-    sortNames: (directive: string) => dispatch(actions.sortNames(directive))
+    addName: (name: string) => dispatch(actionsName.addNewName(name)),
+    removeName: (name: string) => dispatch(actionsName.removeName(name)),
+    sortNames: (directive: string) => dispatch(actionsName.sortNames(directive)),
+    addItem: (item: any) => dispatch(actionsItem.addNewItem(item))
   };
 };
 

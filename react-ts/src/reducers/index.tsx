@@ -1,7 +1,11 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import { items } from './items/index';
 import { names } from './names/index';
 import { StoreState } from './names/constans';
 
-export const store = createStore<StoreState>(names, {
-  names: []
-});
+const rootReducer = combineReducers({
+  names, items
+})
+
+
+export const store = createStore(rootReducer);

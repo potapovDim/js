@@ -80,7 +80,6 @@ module.exports = {
         browser.assert.ok(result.value.length == 4);
       })
       .elements('css selector', button, (result) => {
-        console.log(result.value[3].ELEMENT)
         browser.elementIdClick(result.value[3].ELEMENT)
       })
       .elements('css selector', button, (result) => {

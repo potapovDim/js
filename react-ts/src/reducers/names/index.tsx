@@ -2,7 +2,7 @@
 import { NamesActions } from './actions';
 import { StoreState, ADD_NEW_NAME, REMOVE_NAME, SORT_NAMES } from './constans';
 
-export function names(state: StoreState, action: NamesActions): StoreState {
+export function names(state: StoreState = { names: [] }, action: NamesActions): StoreState {
   switch(action.type) {
     case ADD_NEW_NAME:
       return { ...state, names: [...state.names, action.name] };
@@ -17,6 +17,6 @@ export function names(state: StoreState, action: NamesActions): StoreState {
         })]
       }
     default:
-      return { names: [] };
+      return { ...state };
   };
 };
