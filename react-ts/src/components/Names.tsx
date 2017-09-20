@@ -1,4 +1,9 @@
 import * as React from "react";
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
+import DropZone from './DropZone'
+import DragItem from './DragItem'
 import { Name } from './Name'
 import { AddName } from './AddName'
 import { style } from 'typestyle';
@@ -10,7 +15,7 @@ export interface HelloProps {
     sortNames?: () => any;
 };
 
-export class Names extends React.Component<any, any> {
+class Names extends React.Component<any, any> {
     state = {
         sortOption: 'First name'
     };
@@ -38,6 +43,8 @@ export class Names extends React.Component<any, any> {
                 <div className={style({ flex: 1 })}>
                     <h1 >Names list, names count is {names.length}</h1>
                     <AddName addName={addName} />
+                    <DropZone />
+                    <DragItem />
                 </div>
                 <div className={style({ flex: 1 })}>
                     <div className={style({ marginTop: 80 })}></div>
@@ -58,3 +65,5 @@ export class Names extends React.Component<any, any> {
         );
     };
 };
+
+export default DragDropContext(HTML5Backend)(Names)

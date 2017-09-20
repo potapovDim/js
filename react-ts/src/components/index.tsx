@@ -1,4 +1,4 @@
-import { Names } from './Names';
+import Names from './Names';
 import * as actions from '../reducers/names/actions';
 import { StoreState } from '../reducers/names/constans';
 import { connect, Dispatch } from 'react-redux';
