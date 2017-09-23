@@ -33,12 +33,12 @@ class DragItem extends React.Component<any, any> {
     component: 'red'
   }
   render() {
-    const { connectDragSource } = this.props;
+    const { connectDragSource, addItem } = this.props;
     return connectDragSource(<div className={style({
       background: 'red',
       width: 20,
       height: 20
-    })}></div>)
+    })} onClick={() => addItem(this.state)}></div>)
   }
 };
 

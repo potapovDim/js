@@ -7,7 +7,7 @@ module.exports = {
     const testFirstName = 'TestFirstName';
     const testLastName = 'TestLastName';
 
-    browser.url('http://localhost:9090') 
+    browser.url('http://localhost:9090')
       .waitForElementPresent('body', 1500)
       .setValue(firstName, testFirstName)
       .setValue(lastName, testLastName)

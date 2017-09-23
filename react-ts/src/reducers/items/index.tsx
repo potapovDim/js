@@ -3,7 +3,6 @@ import { ItemActions } from './actions';
 import { StoreState, ADD_ITEM } from './constans';
 
 export function items(state: StoreState = { items: [] }, action: ItemActions): StoreState {
-  console.log(action)
   switch(action.type) {
     case ADD_ITEM:
       return { ...state, items: [...state.items, action.item] };

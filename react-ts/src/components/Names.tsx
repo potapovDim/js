@@ -44,7 +44,7 @@ class Names extends React.Component<any, any> {
                     <h1 >Names list, names count is {names.length}</h1>
                     <AddName addName={addName} />
                     <DropZone {...this.props} />
-                    <DragItem />
+                    <DragItem addItem={addItem}/>
                 </div>
                 <div className={style({ flex: 1 })}>
                     <div className={style({ marginTop: 80 })}></div>
