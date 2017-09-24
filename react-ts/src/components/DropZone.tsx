@@ -1,7 +1,7 @@
 import * as React from "react";
 import { style } from 'typestyle';
 import { DropTarget } from 'react-dnd';
-import { Box } from './Box'
+import { Box } from './box/Box'
 
 const TYPE = 'item';
 type TYPE = typeof TYPE;
@@ -45,7 +45,11 @@ class DropZone extends React.Component<any, any> {
       <div className={style({
         display: 'flex'
       })}>
-        {items.length > 0 && items.map((item: any, index: number) => <Box key={index} index={index} {...item} />)}
+        <div className={style({
+          flex: 1
+        })}>
+          {items.length > 0 && items.map((item: any, index: number) => <Box key={index} index={index} {...item} />)}
+        </div>
       </div>
     </div>
   }
