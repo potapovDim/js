@@ -1,0 +1,20 @@
+{
+  "name": "wdi-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dr": "wd-interface standalone chrome gecko",
+    "dr:st": "wd-interface start standalone",
+    "test": "mocha --timeout 25000 ./example.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "wd-interface": "0.0.3-b"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
+  }
+}
