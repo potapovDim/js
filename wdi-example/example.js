@@ -37,6 +37,8 @@ describe('Base tablse example', () => {
     }
     {
       await markInput.sendKeys(filterValue)
+      const markInputValue = await markInput.getAttribute('value')
+      expect(markInputValue).to.eql(filterValue)
       await submitFilter.click()
       const tableResultsMarks = await tableResult.getElements('.active.brand')
       const resultsMarks = await tableResultsMarks.mappy(async (mark) => await mark.getText())
@@ -48,8 +50,12 @@ describe('Base tablse example', () => {
     {
       await markInput.clear()
       await submitFilter.click()
-      const tableResultsMarks = await tableResult.getElements('.active.brand')
-      const resultsMarks = await tableResultsMarks.mappy(async (mark) => await mark.getText())
+      // const markInputValue = await markInput.getAttribute('value')
+      // expect(markInputValue).to.eql('')
+      // await submitFilter.click()
+      // const tableResultsMarks = await tableResult.getElements('.active.brand')
+      // const resultsMarks = await tableResultsMarks.mappy(async (mark) => await mark.getText())
+      // expect(resultsMarks.length).to.eql(79)
     }
   })
 })
