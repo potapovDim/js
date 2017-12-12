@@ -10,7 +10,7 @@
   <div id="app"></div>
   <button onclick="initInputs()">Inject button</button>
   <input type="text" onchange="changeInputName(event)" placeholder="input test name">
-  <input type="text" onchange="changeInputPassword(event)" placeholder="input test secondname">
+  <input type="text" onchange="changeInputPassword(event)" oninput="changeInputPassword(event)" placeholder="input test secondname">
   <div class="inject"></div>
 
   <script>
@@ -26,9 +26,7 @@
     state.setState = function (newState) {
       const self = this
       Object.keys(newState).forEach(key => {
-        console.log('1')
         const selfValue = self[key]
-        console.log('2', selfValue)
         if (selfValue) {
           if (selfValue !== newState[key]) {
             self[key] = newState[key]
@@ -43,7 +41,7 @@
     }
 
     function changeInputPassword(event) {
-
+      console.log('!!!!!!!!!!!!!!!!!!!!!!')
     }
 
     function changeInputName(event) {

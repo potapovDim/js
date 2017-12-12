@@ -33,6 +33,7 @@ describe('Add name', () => {
     }
     {
       markInput.clear()
+      markInput.sendKeys('')
       submitFilter.click()
       const brands = tableResult.$$('.active.brand')
       expect(brands.count()).toEqual(79)
