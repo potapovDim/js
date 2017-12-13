@@ -6,12 +6,14 @@
   "scripts": {
     "dr": "wd-interface standalone chrome gecko",
     "dr:st": "wd-interface start standalone",
-    "test": "mocha --timeout 25000 ./example.js"
+    "test": "mocha --timeout 25000 ./example-wd-interface.js",
+    "protractor": "protractor"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "wd-interface": "0.0.4-b"
+    "protractor": "^5.2.2",
+    "wd-interface": "0.0.6-b"
   },
   "devDependencies": {
     "chai": "^4.1.2",

@@ -38,3 +38,6 @@ function ReactChangeEvent(node, expectedValue) {
     Object.defineProperty(node, 'value', initialDescriptor)
   }
 }
+
+
+module.exports = ReactChangeEvent
