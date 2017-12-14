@@ -1,0 +1,50 @@
+<div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <input ref="brand" placeholder="марка" (change)="onChange('mark')($event)"/>
+        </td>
+        <td>
+          <input ref="work_vlolume" placeholder="Робочий об'єм" />
+        </td>
+        <td>
+          <input ref="price" placeholder="ціна " />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-default" (click)="initFilter()">Фільтрувати</button>
+
+
+  <table class="table-bordered text-center">
+
+  </table>
+
+  <table class="table text-center">
+    <thead>
+      <tr class="success">
+        <td >Марка</td>
+        <td >Робочий о'єм , метрів кубічних</td>
+        <td >Довжина ,метрів</td>
+        <td >Ширина ,метрів</td>
+        <td >Масса ,кг</td>
+        <td >Ціна</td>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let machine of store">
+        <td class="active brand width-t">{{machine.brand}}</td>
+        <td class="active volume width-t">{{machine.volume}}</td>
+        <td class="active width-t">{{machine.L}}</td>
+        <td class="active width-t">{{machine.W}}</td>
+        <td class="active width-t">{{machine.weight}}</td>
+        <td class="active price width-t">{{machine.price}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+  <button onClick={this.handleCollectData}>Додати</button>
+  <button onClick={this.handleRemoveData}>Видалити</button>
+</div>
