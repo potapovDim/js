@@ -1,0 +1,19 @@
+{
+  "name": "weblium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "landing.selectors.js",
+  "scripts": {
+    "wd:update": "webdriver-manager update",
+    "wd:start": "webdriver-manager start",
+    "test": "mocha --timeout 25000 ./test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "wd-interface": "0.0.7-b",
+    "webdriver-manager": "^12.0.6"
+  }
+}
