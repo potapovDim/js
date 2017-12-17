@@ -1,3 +1,2 @@
-const Landing = require('./landing.selectors')
-
-console.log(Landing.about)
+const arr = [1, 2, 3, 4, 5]
+console.log(arr.length, arr[0])

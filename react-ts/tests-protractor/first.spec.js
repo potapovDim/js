@@ -1,3 +1,5 @@
+const http = require('http')
+
 describe('Add name', () => {
   const baseURL = 'http://localhost:5555'
   const filterValue = 'ITALMIX'
@@ -14,6 +16,10 @@ describe('Add name', () => {
   const markInput = $(mark)
 
   const tableResult = $(tableresult)
+  http.request = ((request) => (opts, ...args) => {
+    console.log(opts.path, args)
+    return request(opts, ...args)
+  })(http.request.bind(http.request));
 
   beforeEach(() => {
     browser.waitForAngularEnabled(false);
