@@ -1,8 +1,9 @@
 const { expect } = require('chai')
 
-const { client, element } = require('wd-interface')
+const { client, element, elements } = require('wd-interface')
 
-const Landing = require('./landing.selectors')
+const Landing = require('/Users/potapopweblium/Documents/js-trash/weblium/landing.selectors')
+const Footer = require('./footer')
 
 describe('Weblium base example', () => {
   let browser = null
@@ -10,7 +11,7 @@ describe('Weblium base example', () => {
 
   const pricing = element(Landing.pricing)
   const about = element(Landing.about)
-
+  const footer = new Footer()
   //selectors
 
   before(async () => {
@@ -27,17 +28,20 @@ describe('Weblium base example', () => {
     expect(url).to.eql(baseURL)
   })
 
+  it.only("find footer", async () => {
+    await footer.clickAbout()
+  })
+
   it('click pricing', async () => {
     await pricing.waitForElement(2000)
     await pricing.click()
     const url = await browser.getUrl()
+
     expect(url).to.contains('pricing')
 
-    const body = element('body')
+    const borderPricing = element('body').getElements('.border')
 
-    const borderPricing = await body.getElements('.border')
-
-    expect(borderPricing.length).to.eql(5)
+    expect(await borderPricing.count()).to.eql(5)
   })
 
   it('click about', async () => {
@@ -46,9 +50,9 @@ describe('Weblium base example', () => {
     const url = await browser.getUrl()
 
     expect(url).to.contains('about')
-    const body = element('body')
-    const aboutContainer = await body.getElements('.container')
-    expect(aboutContainer.length).to.eql(7)
+    const aboutContainer = element('body').getElements('.container')
+
+    expect(await aboutContainer.count()).to.eql(7)
   })
 
   it('login to my account', async () => {
