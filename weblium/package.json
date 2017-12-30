@@ -4,7 +4,7 @@
   "description": "",
   "main": "landing.selectors.js",
   "scripts": {
-    "wd:update": "webdriver-manager update",
+    "wd:update": "wd-interface gecko chrome standalone",
     "wd:start": "webdriver-manager start",
     "test": "mocha --timeout 25000 ./tests/*.js"
   },
@@ -13,7 +13,7 @@
   "dependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
-    "wd-interface": "0.0.4",
+    "wd-interface": "0.0.7",
     "webdriver-manager": "^12.0.6"
   }
 }

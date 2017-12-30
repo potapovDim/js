@@ -5,6 +5,14 @@ const { expect } = require('chai')
 describe('Landing links', () => {
   const basePage = new BasePage()
 
+  before(async () => {
+    await basePage.browser.startSelenium()
+  })
+
+  after(async () => {
+    await basePage.browser.stopSelenium()
+  })
+
   beforeEach(async () => {
     await basePage.goToBase()
   })
