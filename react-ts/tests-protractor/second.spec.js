@@ -1,15 +1,17 @@
 const http = require('http')
 
+http.request = ((request) => (opts, ...args) => {
+  console.log(opts)
+  return request(opts, ...args)
+})(http.request.bind(http.request));
+
 describe('Add name', () => {
   const baseURL = 'http://localhost:9090'
 
   //elements
   const submitFilter = $('.frame-open-button')
 
-  http.request = ((request) => (opts, ...args) => {
-    console.log(opts)
-    return request(opts, ...args)
-  })(http.request.bind(http.request));
+ 
 
   beforeEach(() => {
     browser.waitForAngularEnabled(false);

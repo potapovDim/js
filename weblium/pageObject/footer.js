@@ -4,11 +4,12 @@ const Pricing = require('./pricing')
 
 class Footer {
   constructor() {
-    this.footerSelector = '.row-wrapper'
+    this.footer = elements('.row-wrapper')
   }
 
   async getFooter() {
-    const footer = await elements(this.footerSelector).get(21)
+    await this.footer.waitForElements(5000)
+    const footer = await this.footer.get(21)
     return footer
   }
 
