@@ -3,7 +3,7 @@ const { element } = require('wd-interface')
 class Table {
   constructor() {
     this.inputFilterMark = element('[placeholder="марка"]')
-    this.tableTextContent = element('.table.text-center')
+    this.tableTextContent = element('.table.text-center').getElements('.active.brand')
     this.submitFilter = element('.btn.btn-default')
   }
 
@@ -18,8 +18,8 @@ class Table {
   }
 
   async getTablMarks() {
-    const markElements = await this.tableTextContent.getElements('.active.brand')
-    return await markElements.mappy(async (mark) => await mark.getText())
+    await this.tableTextContent.waitForElements(1000)
+    return this.tableTextContent.map(async (mark) => await mark.getText())
   }
 }
 

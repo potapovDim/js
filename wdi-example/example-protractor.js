@@ -12,7 +12,8 @@ describe('Base table example protractor', () => {
     browser.waitForAngularEnabled(false);
     browser.get(baseURL);
     browser.driver.manage().window().setSize(1400, 900);
-  });
+  })
+
   afterEach(() => {
     browser.close()
   })

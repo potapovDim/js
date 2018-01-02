@@ -11,9 +11,35 @@
   <button onclick="initInputs()">Inject button</button>
   <input type="text" onchange="changeInputName(event)" placeholder="input test name">
   <input type="text" onchange="changeInputPassword(event)" oninput="changeInputPassword(event)" placeholder="input test secondname">
+
+  <div draggable="true" ondragstart="onDragStart(event)" ondragend="onDragEnd(event)">Drag Object</div>
+
+  <div droppable="true" ondragover="onDragOver(event)" ondragleave="onDragLeav(event)" >Drop Zone</div>
   <div class="inject"></div>
 
   <script>
+
+
+    function onDragStart(event) {
+      console.log("drag start", /*event*/)
+    }
+
+    function onDragEnd(event) {
+      console.log('drag end')
+    }
+
+    function onDragOver(event) {
+      const { path: [currentNode] } = event
+      currentNode.style.backgroundColor = "red"
+      // console.log("drag over", event, currentNode.style)
+    }
+
+    function onDragLeav(event) {
+      const { path: [currentNode] } = event
+      currentNode.style.backgroundColor = ""
+      // console.log("drag over", event, currentNode.style)
+    }
+
     const customEvent = new CustomEvent('inject')
 
     document.querySelector('.inject').addEventListener('inject', (event) => {
@@ -59,6 +85,12 @@
       inpTestName.dispatchEvent(ev)
       inpTesSecondname.dispatchEvent(ev)
     }
+    // document.addEventListener('click', (event) => {
+    //   const { screenX, screenY, x, y } = event
+    //   console.log({
+    //     screenX, screenY, x, y
+    //   })
+    // })
   </script>
 </body>
 

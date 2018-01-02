@@ -7,15 +7,22 @@ const ReactChangeEvent = require('../test-example/dispatchChange')
 const Table = require('./po/table')
 
 describe('Base tablse example', () => {
-  let browser = null
+  const browser = client().chrome()
   let table = null
   const baseURL = 'http://localhost:5555'
   const filterValue = 'ITALMIX'
   //selectors
 
+  before(async () => {
+    await browser.startSelenium()
+  })
+
+  after(async () => {
+    await browser.stopSelenium()
+  })
+
   beforeEach(async () => {
     table = new Table()
-    browser = client().chrome()
     await browser.goTo(baseURL)
   })
 
@@ -23,7 +30,7 @@ describe('Base tablse example', () => {
     await browser.closeBrowser()
   })
 
-  it('search git hub potapovDim', async () => {
+  it('from request', async () => {
     {
       const initialMarks = await table.getTablMarks()
       expect(initialMarks.length).to.eql(79)
@@ -42,9 +49,7 @@ describe('Base tablse example', () => {
 
   it('from script', async () => {
     {
-      await browser.sleep(3000)
-      const val = await browser.executeScript(function () {
-        const args = []
+      const val = await browser.executeScript(`
         const button = document.querySelector('.btn.btn-default')
         const lengthBefore = document.querySelectorAll('.active.brand').length
         ReactChangeEvent(document.querySelector('[placeholder="марка"]'), 'ITALMIX')
@@ -53,10 +58,8 @@ describe('Base tablse example', () => {
         ReactChangeEvent(document.querySelector('[placeholder="марка"]'), '')
         button.click()
         const lengthAfterClear = document.querySelectorAll('.active.brand').length
-        args.push(lengthBefore, lengthAfter, lengthAfterClear)
-        return args
-      })
-      await browser.sleep(3000)
+        return [lengthBefore, lengthAfter, lengthAfterClear]
+      `)
       expect(val).to.eql([79, 13, 79])
     }
   })
