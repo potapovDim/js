@@ -1,3 +1,6 @@
+const http = require('http')
+let server
+
 const initialState = {
   stern_machines: [
     { brand: 'ITALMIX DUPLEX 10 MC', productivity: 11.5, work_volume: 10, L: '', W: '', weight: '', tractor_power: 1.4, price: 808482.18 },
@@ -92,45 +95,30 @@ const initialState = {
   ]
 }
 
-const FILTER_NAME = 'FILTER_NAME'
-const FILTER_VOLUME = 'FILTER_VOLUME'
-const FILTER_PRICE = 'FILTER_PRICE'
-const FILTER_DROP = 'FILTER_DROP'
-const SET_INITIAL_STATE = 'SET_INITIAL_STATE'
+server = http.createServer(function (req, res) {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Request-Method', '*')
+  res.setHeader('Access-Control-Allow-Methods', '*')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  let requestBody = ''
 
-export const filterName = ({ value }) => ({ type: FILTER_NAME, value })
-export const filterVolume = ({ value }) => ({ type: FILTER_VOLUME, value })
-export const filterPrice = ({ value }) => ({ type: FILTER_PRICE, value })
-export const filterDrop = () => ({ type: FILTER_DROP })
-export const setState = (storeFrome) => ({ type: SET_INITIAL_STATE, storeFrome })
-
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case FILTER_NAME:
-      return {
-        ...state, stern_machines: state.stern_machines.filter(machine => {
-          return machine.brand.includes(action.value)
-        })
-      }
-    case FILTER_PRICE:
-      return {
-        ...state, stern_machines: state.stern_machines.filter(machine => {
-          return machine.price < +action.value
-        })
-      }
-    case FILTER_VOLUME:
-      return {
-        ...state, stern_machines: state.stern_machines.filter(machine => {
-          return machine.work_volume < +action.value
-        })
-      }
-    case SET_INITIAL_STATE:
-      return {
-        ...state, ...action.storeFrome
-      }
-    case FILTER_DROP:
-      return { ...initialState }
-    default:
-      return state
+  if (req.method === 'GET') {
+    res.writeHead(200)
+    res.write(JSON.stringify(initialState))
+    res.end()
+  } else {
+    req.on('data', (chunk) => {
+      requestBody += chunk.toString('utf8')
+    }).on('end', () => {
+      initialState.stern_machines.push(JSON.parse(requestBody))
+      res.writeHead(201)
+      res.write(JSON.stringify(initialState))
+      res.end()
+    })
   }
-}
+
+
+})
+
+server.listen(8085)

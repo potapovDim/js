@@ -8,29 +8,52 @@ const Table = require('./po/table')
 
 describe('Base tablse example', () => {
   const browser = client().chrome()
+  const browserFireFox = client().firefox()
+
   let table = null
   const baseURL = 'http://localhost:5555'
   const filterValue = 'ITALMIX'
   //selectors
 
   before(async () => {
-    await browser.startSelenium()
+    // await browser.startSelenium()
   })
 
   after(async () => {
-    await browser.stopSelenium()
+    // await browser.stopSelenium()
+    console.log(global.___sessionId)
   })
 
   beforeEach(async () => {
     table = new Table()
     await browser.goTo(baseURL)
+    await browserFireFox.goTo(baseURL)
   })
 
   afterEach(async () => {
+    await browserFireFox.closeBrowser()
     await browser.closeBrowser()
   })
 
-  it('from request', async () => {
+  it('initial test', async () => {
+  })
+
+  it.skip('combine data', async () => {
+    const initialMarks = await table.getTablMarks()
+    expect(initialMarks.length).to.eql(79)
+  })
+
+  it.skip('combine data from script', async () => {
+    const initialMarks = await browser.executeScript(function () {
+      return [].map.call(document.querySelectorAll('.active.brand'), (doc) => {
+        return doc.innerText
+      })
+    })
+
+    expect(initialMarks.length).to.eql(79)
+  })
+
+  it.skip('from request ', async () => {
     {
       const initialMarks = await table.getTablMarks()
       expect(initialMarks.length).to.eql(79)
@@ -45,9 +68,9 @@ describe('Base tablse example', () => {
       const clearFilteredMarks = await table.getTablMarks()
       expect(clearFilteredMarks.length).to.eql(79)
     }
-  });
+  })
 
-  it('from script', async () => {
+  it.skip('from script', async () => {
     {
       const val = await browser.executeScript(`
         const button = document.querySelector('.btn.btn-default')

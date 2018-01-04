@@ -13,7 +13,7 @@
   "dependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
-    "wd-interface": "0.0.11",
+    "wd-interface": "0.0.12",
     "webdriver-manager": "^12.0.6"
   }
 }

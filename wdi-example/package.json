@@ -7,13 +7,14 @@
     "dr": "wd-interface standalone chrome gecko",
     "dr:st": "wd-interface start standalone",
     "test": "mocha --timeout 25000 ./example-wd-interface.js",
+    "test:w": "mocha --watch --timeout 25000 ./example-wd-interface.js",
     "protractor": "protractor"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "protractor": "^5.2.2",
-    "wd-interface": "0.0.11"
+    "wd-interface": "git+https://github.com/superTes/interface-webdriver#develop"
   },
   "devDependencies": {
     "chai": "^4.1.2",

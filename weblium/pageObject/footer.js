@@ -8,14 +8,11 @@ class Footer {
   }
 
   async getFooter() {
-    await this.footer.waitForElements(5000)
-    const footer = await this.footer.get(21)
-    return footer
+    return (await this.footer.waitForElements(5000)).get(21)
   }
 
   async clickAbout() {
-    const footer = await this.getFooter()
-    const about = await footer.getElements('a').get(3)
+    const about = 
     await about.click()
   }
 
