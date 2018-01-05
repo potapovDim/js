@@ -1,5 +1,8 @@
 const http = require('http')
 
+const { element } = require('wd-interface')
+const { Keys } = require('wd-interface/interface/event/keys')
+
 // http.request = ((request) => (opts, ...args) => {
 //   console.log(opts)
 //   return request(opts, ...args)
@@ -19,7 +22,7 @@ describe('Landing links', () => {
   })
 
   after(async () => {
-    await basePage.browser.stopSelenium()
+    // await basePage.browser.stopSelenium()
   })
 
   beforeEach(async () => {
@@ -27,7 +30,60 @@ describe('Landing links', () => {
   })
 
   afterEach(async () => {
-    await basePage.closeBrowser()
+    // await basePage.closeBrowser()
+  })
+
+  it.only('clear test', async () => {
+    const username = 'dereva@dereva'
+    const password = '123123'
+    await element('[href="https://weblium.com/login"]').click()
+    //set value into input
+    await element('#id5').sendKeys(username)
+    await element('#id9').sendKeys(password)
+    console.log(await element('#id5').getAttribute('value'))
+    console.log(await element('#id9').getAttribute('value'))
+    console.log('---------------------------------')
+    // clear inputs
+    await element('#id5').clear()
+    await element('#id9').clear()
+    console.log(await element('#id5').getAttribute('value'))
+    console.log(await element('#id9').getAttribute('value'))
+    console.log('---------------------------------')
+    //when try to set some new previous value still present in inputs
+    await element('#id5').sendKeys(Keys.BACK_SPACE)
+    await element('#id9').sendKeys(Keys.BACK_SPACE)
+    console.log(await element('#id5').getAttribute('value'))
+    console.log(await element('#id9').getAttribute('value'))
+    console.log('---------------------------------')
+    console.log(await element('#id5').getAttribute('value'))
+    console.log(await element('#id9').getAttribute('value'))
+
+
+    // totally clear
+  })
+
+  it.only('clear test with not react project', async () => {
+    await basePage.browser.goTo('https://semantic-ui.com/examples/login.html')
+
+    const username = 'dereva@dereva'
+    const password = '123123'
+    //set value into input
+    await element('[name="email"]').sendKeys(username)
+    await element('[name="password"]').sendKeys(password)
+    console.log(await element('[name="email"]').getAttribute('value'))
+    console.log(await element('[name="password"]').getAttribute('value'))
+    console.log('=================================')
+    // clear inputs
+    await element('[name="password"]').clear()
+    await element('[name="email"]').clear()
+    console.log(await element('[name="password"]').getAttribute('value'))
+    console.log(await element('[name="email"]').getAttribute('value'))
+    console.log('=================================')
+    await element('[name="email"]').sendKeys(Keys.BACK_SPACE)
+    await element('[name="password"]').sendKeys(Keys.BACK_SPACE)
+    console.log(await element('[name="password"]').getAttribute('value'))
+    console.log(await element('[name="email"]').getAttribute('value'))
+    console.log('=================================')
   })
 
   it('link pricing', async () => {
