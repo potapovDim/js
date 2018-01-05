@@ -12,6 +12,13 @@ class BasePage {
     await this.browser.goTo('https://weblium.com/')
   }
 
+  async login(username, password) {
+    await element('[href="https://weblium.com/login"]').click()
+    await element('#id5').sendKeys(username)
+    await element('#id9').sendKeys(password)
+    await element('[title="Login"]').click()
+  }
+
   async closeBrowser() {
     await this.browser.closeBrowser()
   }

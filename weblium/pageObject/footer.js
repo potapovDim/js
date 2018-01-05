@@ -12,7 +12,8 @@ class Footer {
   }
 
   async clickAbout() {
-    const about = 
+    const footer = await this.getFooter()
+    const about = await footer.getElements('a').get(3)
     await about.click()
   }
 

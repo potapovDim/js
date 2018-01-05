@@ -14,7 +14,7 @@
   "dependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
-    "wd-interface": "",
+    "wd-interface": "git+https://github.com/potapovDim/interface-webdriver#develop",
     "webdriver-manager": "^12.0.6"
   },
   "devDependencies": {

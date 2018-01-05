@@ -15,11 +15,11 @@ describe('Landing links', () => {
   const basePage = new BasePage()
 
   before(async () => {
-    // await basePage.browser.startSelenium()
+    await basePage.browser.startSelenium()
   })
 
   after(async () => {
-    // await basePage.browser.stopSelenium()
+    await basePage.browser.stopSelenium()
   })
 
   beforeEach(async () => {
@@ -40,12 +40,18 @@ describe('Landing links', () => {
     expect(await pricing.getMonthlyPrice()).to.eql('$15')
   })
 
-  // it('link about', async () => {
-  //   // клікаємо з футера лінку на ебаут
-  //   await basePage.fromFooterToAbout()
-  //   // перевіряємо що наш поточний урл містить слово 'about'
-  //   expect(await basePage.returnCurrentUrl()).to.contains('about')
-  // })
+  it('link about', async () => {
+    // клікаємо з футера лінку на ебаут
+    await basePage.fromFooterToAbout()
+    // перевіряємо що наш поточний урл містить слово 'about'
+    expect(await basePage.returnCurrentUrl()).to.contains('about')
+  })
+
+  it('login user', async () => {
+    await basePage.login('dereva@dereva', '123123')
+    await basePage.browser.sleep(1000)
+    expect(await basePage.browser.getUrl()).to.contains('myaccount')
+  })
 });
 
 //"wd-interface": "git+ssh://git@github.com:potapovDim/interface-webdriver.git#develop",
