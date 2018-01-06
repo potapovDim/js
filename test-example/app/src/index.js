@@ -3,12 +3,15 @@ import { connect } from 'react-redux'
 
 import { filterName, filterVolume, filterPrice, filterDrop, setState } from '../reducer/index'
 
+import { Modal } from './modal'
+
 class SternMachineTable extends React.Component {
   state = {
     name: '',
     volume: '',
     price: '',
-    machine: {}
+    machine: {},
+    currendItem: null
   }
 
   handleChangeFilter = (type) => ({ target: { value } }) => {
@@ -62,11 +65,27 @@ class SternMachineTable extends React.Component {
     }
   }
 
+  renderItem = (item) => () => {
+    console.log('@#L!J#LKJ!@JLK#L!JLK#!')
+    this.setState({
+      currendItem: item
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      currendItem: null
+    })
+  }
+
   render() {
-    let { stern_machines } = this.props;
+    const { currendItem } = this.state
+    console.l
+    const { renderItem } = this
+    let { stern_machines } = this.props
     let table = stern_machines.map(function (item, index) {
       return (
-        <tr key={index}>
+        <tr key={index} onClick={renderItem(item)}>
           <td style={{ width: '14%' }} className="active brand">{item.brand}</td>
           <td style={{ width: '14%' }} className="active volume">{item.work_volume}</td>
           <td style={{ width: '14%' }} className="active">{item.L}</td>
@@ -79,6 +98,7 @@ class SternMachineTable extends React.Component {
     })
     return (
       <div>
+        {currendItem && <Modal item={currendItem} closeModal={this.closeModal} />}
         <table style={{ width: '100%' }} className="table">
           <tbody >
             <tr>
@@ -112,7 +132,7 @@ class SternMachineTable extends React.Component {
         </table>
         <table style={{ width: '100%' }} className="table-bordered text-center">
           <thead>
-            <tr className="success">
+            <tr className="success inputs">
               <td style={{ width: '14%', height: '40px' }}><input onChange={this.handleAdd('brand')} placeholder="Марка" /></td>
               <td style={{ width: '14%' }}><input onChange={this.handleAdd('work_volume')} placeholder="Робочий о'єм , метрів кубічних" /></td>
               <td style={{ width: '14%' }}><input onChange={this.handleAdd('L')} placeholder="Довжина ,метрів" /></td>

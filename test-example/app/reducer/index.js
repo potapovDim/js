@@ -89,7 +89,8 @@ const initialState = {
     { brand: 'Хозяин СРК-14В', productivity: 11.5, work_volume: 14, L: 6.99, W: 2.36, weight: 6200, tractor_power: 70, price: 522286.51 },
     { brand: 'Хозяин СРК-16В', productivity: 11.5, work_volume: 16, L: 6.99, W: 2.39, weight: 6200, tractor_power: 70, price: 622286.51 },
     { brand: 'Хозяин СРК-21В', productivity: 11.5, work_volume: 21, L: 6.44, W: 2.6, weight: 6200, tractor_power: 70, price: 829665.00 },
-  ]
+  ],
+  filter: ''
 }
 
 const FILTER_NAME = 'FILTER_NAME'
@@ -106,12 +107,13 @@ export const setState = (storeFrome) => ({ type: SET_INITIAL_STATE, storeFrome }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FILTER_NAME:
+    case FILTER_NAME: {
       return {
-        ...state, stern_machines: state.stern_machines.filter(machine => {
+        ...state, filter: action.value, stern_machines: state.stern_machines.filter(machine => {
           return machine.brand.includes(action.value)
         })
       }
+    }
     case FILTER_PRICE:
       return {
         ...state, stern_machines: state.stern_machines.filter(machine => {
@@ -124,10 +126,17 @@ export default (state = initialState, action) => {
           return machine.work_volume < +action.value
         })
       }
-    case SET_INITIAL_STATE:
-      return {
-        ...state, ...action.storeFrome
+    case SET_INITIAL_STATE: {
+      if (state.filter.length) {
+        action.storeFrome.stern_machines =  action.storeFrome.stern_machines.filter(machine => {
+          return machine.brand.includes(state.filter)
+        })
       }
+      return {
+        ...state, ...action.storeFrome, filter: state.filter
+      }
+    }
+
     case FILTER_DROP:
       return { ...initialState }
     default:

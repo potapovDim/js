@@ -13,17 +13,18 @@ class Root extends Component {
   }
 
   componentWillMount() {
-    this.requestInterval = setInterval(() => {
-      fetch('http://localhost:8085/', {
-        node: 'no-cors'
-      }).then(resp => resp.json()).then((parsedData) => {
-        store.dispatch(setState(parsedData))
-      })
-    }, 500)
+    // this.requestInterval = setInterval(() => {
+    //   fetch('http://localhost:8085/', {
+    //     node: 'no-cors'
+    //   }).then(resp => resp.json()).then((parsedData) => {
+    //     store.dispatch(setState(parsedData))
+    //   })
+    // }, 500)
   }
 
   componentWillUnmount() {
-    clearInterval(this.requestInterval)
+    
+    // clearInterval(this.requestInterval)
   }
 
   render() {
