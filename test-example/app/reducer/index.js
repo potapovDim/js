@@ -128,7 +128,7 @@ export default (state = initialState, action) => {
       }
     case SET_INITIAL_STATE: {
       if (state.filter.length) {
-        action.storeFrome.stern_machines =  action.storeFrome.stern_machines.filter(machine => {
+        action.storeFrome.stern_machines = action.storeFrome.stern_machines.filter(machine => {
           return machine.brand.includes(state.filter)
         })
       }

@@ -4,12 +4,15 @@ import store from './reducer/rootReducer'
 
 import { setState } from './reducer/index'
 
+import { Login } from './src/login'
+
 import Tables from './src'
 
 class Root extends Component {
 
   state = {
-    renderTabses: false
+    renderTabses: false,
+    user: null
   }
 
   componentWillMount() {
@@ -22,16 +25,34 @@ class Root extends Component {
     // }, 500)
   }
 
+
+  login = (user) => {
+    this.setState({ user })
+  }
+
+
+
   componentWillUnmount() {
-    
+
     // clearInterval(this.requestInterval)
   }
 
   render() {
-    return (
-      <Provider store={store}>
-        <Tables />
-      </Provider>
+    const { user } = this.state
+    console.log(user)
+    return (<div>
+      {
+        user ?
+          <div>
+            <div className="username">
+              Ім'я користувача "{user.username}"
+            </div>
+            <Provider store={store}>
+              < Tables />
+            </Provider >
+          </div> : <Login login={this.login} />
+      }
+    </div>
     )
   }
 }

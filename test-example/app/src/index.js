@@ -66,7 +66,6 @@ class SternMachineTable extends React.Component {
   }
 
   renderItem = (item) => () => {
-    console.log('@#L!J#LKJ!@JLK#L!JLK#!')
     this.setState({
       currendItem: item
     })
