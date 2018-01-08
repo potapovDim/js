@@ -9,5 +9,6 @@ test-app/.DS_Store
 b.js/node_modules
 .DS_Store
 wdi-example/node_modules
+wdi-example/package-lock.json
 test-example/node_modules
 weblium/node_modules
