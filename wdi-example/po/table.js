@@ -1,4 +1,4 @@
-const { element } = require('wd-interface')
+const { element, elements } = require('wd-interface')
 
 class Table {
   constructor() {
@@ -18,7 +18,7 @@ class Table {
   }
 
   async getTablMarks() {
-    // await this.tableTextContent.waitForElements(1000)
+    await this.tableTextContent.waitForElements(1000)
     return this.tableTextContent.map(async (mark) => await mark.getText())
   }
 }

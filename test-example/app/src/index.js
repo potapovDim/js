@@ -65,6 +65,29 @@ class SternMachineTable extends React.Component {
     }
   }
 
+  startRezieFilterButton = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    const { clientX: startX } = event
+    const target = event.target
+
+    const { x, width } = target.getBoundingClientRect()
+
+    const mouseMove = (event) => {
+      const x = event.clientX - startX
+      target.style.width = `${width + x}px`
+    }
+
+    const mouseUp = () => {
+      document.removeEventListener('mousemove', mouseMove)
+      document.removeEventListener('mouseup', mouseUp)
+    }
+
+    document.addEventListener('mousemove', mouseMove)
+    document.addEventListener('mouseup', mouseUp)
+  }
+
   renderItem = (item) => () => {
     this.setState({
       currendItem: item
@@ -109,7 +132,7 @@ class SternMachineTable extends React.Component {
             </tr>
           </tbody>
         </table >
-        <button className="btn btn-default" onClick={this.initFilter}>Фільтрувати</button>
+        <button className="btn btn-default" onClick={this.initFilter} style={{ width: '100px' }} onMouseDown={this.startRezieFilterButton}>Фільтрувати</button>
         <h3 className="text-center">Основні показники машин для роздавання кормів</h3>
         <table style={{ width: '100%' }} className="table-bordered text-center">
           <thead>

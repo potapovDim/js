@@ -1,42 +1,38 @@
-const Table = require('./po/table.protractor')
+const Table = require('./po-protractor/table')
+const Login = require('./po-protractor/login')
 
 
-describe('Base table example protractor', () => {
+describe('Base table test protractor', () => {
+  const loginPage = new Login()
   let table = null
-  const baseURL = 'http://localhost:5555'
   const filterValue = 'ITALMIX'
 
-
-  beforeEach(() => {
-    table = new Table()
-    browser.waitForAngularEnabled(false);
-    browser.get(baseURL);
-    browser.driver.manage().window().setSize(1400, 900);
+  before(async () => {
+    await browser.waitForAngularEnabled(false);
+    await browser.get(browser.baseUrl);
+    await browser.driver.manage().window().setSize(1400, 900);
   })
 
-  afterEach(() => {
-    browser.close()
+  after(async () => {
+    await browser.close()
   })
-  it('Success add name', () => {
+
+  it('success login', async () => {
+    table = await loginPage.login('test name', 'test pass')
+  })
+
+  it('filter fields', async () => {
     {
-      const initialMarks = table.getTablMarks()
-      initialMarks.then(arr => {
-        expect(arr.length).toEqual(79)
-      })
+      await table.initFilterMark(filterValue)
+      const values = await table.getTablMarks()
+      console.log(values)
     }
     {
-      table.initFilterMark(filterValue)
-      const filteredMarks = table.getTablMarks()
-      filteredMarks.then(arr => {
-        expect(arr.length).toEqual(13)
-      })
+     await table.clearFilterMark()
+     const values = await table.getTablMarks()
+
+     console.log(values)
     }
-    {
-      table.clearFilterMark()
-      const clearFilteredMarks = table.getTablMarks()
-      clearFilteredMarks.then(arr => {
-        expect(arr.length).toEqual(79)
-      })
-    }
+
   })
 })

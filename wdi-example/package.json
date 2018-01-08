@@ -6,6 +6,7 @@
   "scripts": {
     "dr": "wd-interface standalone chrome gecko",
     "dr:st": "wd-interface start standalone",
+    "wd:up": "webdriver-manager update",
     "test": "mocha --timeout 25000 ./example-wd-interface.js",
     "test:w": "mocha --watch --timeout 25000 ./example-wd-interface.js",
     "protractor": "protractor"
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "test-fake-server": "^1.5.4"
   }
 }
