@@ -44,6 +44,6 @@ async function startTest(params) {
   }
 }
 
-startTest()
+// startTest()
 
 

@@ -95,6 +95,20 @@ const initialState = {
   ]
 }
 
+
+let tokens = []
+
+
+const tokenGenerator = () => {
+  const stringPass = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
+  let tok = '';
+  const rand = () => parseInt((Math.random() * 55).toFixed(0))
+  for (let i = 0; i < 20; i++) {
+    tok += stringPass[rand()]
+  }
+  return tok
+}
+
 server = http.createServer(function (req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -105,20 +119,109 @@ server = http.createServer(function (req, res) {
 
   if (req.method === 'GET') {
     res.writeHead(200)
-    res.write(JSON.stringify(initialState))
+    res.write(JSON.stringify({ get: true }))
     res.end()
   } else {
     req.on('data', (chunk) => {
       requestBody += chunk.toString('utf8')
     }).on('end', () => {
-      initialState.stern_machines.push(JSON.parse(requestBody))
-      res.writeHead(201)
-      res.write(JSON.stringify(initialState))
+      switch (req.url) {
+        case '/login': {
+          res.writeHead(201)
+          const { name } = requestBody
+          const token = tokenGenerator()
+
+          tokens.push({
+            name,
+            token,
+            expired: +Date.now() + 10 * 60 * 1000 // 10 minutes
+          })
+          res.write(JSON.stringify({ token, ...initialState }))
+          break
+        }
+
+        case '/logout': {
+          const { token } = JSON.parse(requestBody)
+          tokens = tokens.filter(tok => tok.token !== token)
+          res.writeHead(200)
+          res.write(JSON.stringify({ logout: true }))
+          break
+        }
+
+        case '/pingtoken': {
+          const { token } = JSON.parse(requestBody)
+          if (!token || !tokens.length) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ unauthorized: true }))
+            break
+          }
+          const [{ expired }] = tokens.filter(tok => tok.token === token)
+          if (expired > +Date.now()) {
+            res.writeHead(200)
+            res.write(JSON.stringify({ valid: true, ...initialState }))
+            break
+          } else {
+            res.writeHead(404)
+            res.write(JSON.stringify({ tokenErro: 'token expired' }))
+            tokens = tokens.filter(tok => tok.token != token)
+            break
+          }
+        }
+
+        case '/add': {
+          const { token, machine } = JSON.parse(requestBody)
+          if (!token || !tokens.length) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ unauthorized: true }))
+            break
+          } else if (!machine) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ bad_data: true }))
+            break
+          }
+          const [{ expired }] = tokens.filter(tok => tok.token === token)
+          if (expired < +Date.now()) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ tokenErro: 'token expired' }))
+            tokens = tokens.filter(tok => tok.token != token)
+            break
+          } else {
+            initialState.stern_machines.push(machine)
+            res.writeHead(201)
+            res.write(JSON.stringify({ valid: true, ...initialState }))
+            break
+          }
+
+        }
+
+        // case '/resourses': {
+        //   const { token } = JSON.parse(requestBody)
+        //   if (!token) {
+        //     res.writeHead(401)
+        //     res.write(JSON.stringify({ unauthorized: true }))
+        //     break
+        //   }
+        //   const [{ expired }] = tokens.filter(tok => tok.token === token)
+        //   if (expired > +Date.now()) {
+        //     res.writeHead(200)
+        //     res.write(JSON.stringify({ ...initialState }))
+        //     break
+        //   } else {
+        //     res.writeHead(404)
+        //     res.write(JSON.stringify({ tokenErro: 'token expired' }))
+        //     break
+        //   }
+        // }
+
+        default: {
+          res.writeHead(201)
+          res.write(JSON.stringify({ post: true }))
+          break
+        }
+      }
       res.end()
     })
   }
-
-
 })
 
-server.listen(8085)
+server.listen(9999)

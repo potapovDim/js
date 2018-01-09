@@ -23,16 +23,15 @@ describe('Base table test protractor', () => {
 
   it('filter fields', async () => {
     {
-      await table.initFilterMark(filterValue)
+      // await table.initFilterMark(filterValue)
       const values = await table.getTablMarks()
       console.log(values)
     }
     {
-     await table.clearFilterMark()
+    //  await table.clearFilterMark()
      const values = await table.getTablMarks()
 
      console.log(values)
     }
-
   })
 })

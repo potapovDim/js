@@ -15,27 +15,10 @@ class Root extends Component {
     user: null
   }
 
-  componentWillMount() {
-    // this.requestInterval = setInterval(() => {
-    //   fetch('http://localhost:8085/', {
-    //     node: 'no-cors'
-    //   }).then(resp => resp.json()).then((parsedData) => {
-    //     store.dispatch(setState(parsedData))
-    //   })
-    // }, 500)
-  }
-
-
   login = (user) => {
     this.setState({ user })
   }
 
-
-
-  componentWillUnmount() {
-
-    // clearInterval(this.requestInterval)
-  }
 
   render() {
     const { user } = this.state

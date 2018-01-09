@@ -1,5 +1,10 @@
+
+const env = process.env.NODE_ENV
+
+const sourceFile = env === 'base' ? './main.js' : './main-server.js'
+
 module.exports = {
-  entry: './main.js',
+  entry: sourceFile,
   output: {
     path: './',
     filename: "index.js"

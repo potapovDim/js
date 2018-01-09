@@ -13,13 +13,13 @@ describe('Base table test ', () => {
   //selectors
 
   before(async () => {
-    // await browser.startSelenium()
+    await browser.startSelenium()
     await browser.goTo(baseURL)
   })
 
   after(async () => {
     await browser.closeBrowser()
-    // await browser.stopSelenium()
+    await browser.stopSelenium()
   })
 
   it('success login', async () => {
@@ -28,16 +28,23 @@ describe('Base table test ', () => {
 
   it('filter fields', async () => {
     {
-      await table.initFilterMark(filterValue)
+      // await table.initFilterMark(filterValue)
       const values = await table.getTablMarks()
       console.log(values)
     }
     {
-      await table.clearFilterMark()
+      // await table.clearFilterMark()
       const values = await table.getTablMarks()
-
       console.log(values)
     }
   })
 
+  it('combineDataOneField', async () => {
+    const modalData = await table.combineDataOneField()
+    const tableRowData = await table.combineDataOneFieldTable()
+    expect(modalData.length).to.eql(tableRowData.length)
+    for (let i = 0; i < modalData.length; i++) {
+      expect(modalData[i]).to.eql(tableRowData[i])
+    }
+  })
 })

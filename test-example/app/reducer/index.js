@@ -97,13 +97,13 @@ const FILTER_NAME = 'FILTER_NAME'
 const FILTER_VOLUME = 'FILTER_VOLUME'
 const FILTER_PRICE = 'FILTER_PRICE'
 const FILTER_DROP = 'FILTER_DROP'
-const SET_INITIAL_STATE = 'SET_INITIAL_STATE'
+const ADD_MACHINE = 'ADD_MACHINE'
 
 export const filterName = ({ value }) => ({ type: FILTER_NAME, value })
 export const filterVolume = ({ value }) => ({ type: FILTER_VOLUME, value })
 export const filterPrice = ({ value }) => ({ type: FILTER_PRICE, value })
 export const filterDrop = () => ({ type: FILTER_DROP })
-export const setState = (storeFrome) => ({ type: SET_INITIAL_STATE, storeFrome })
+export const addMachine = ({ machine }) => ({ type: ADD_MACHINE, machine })
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -126,17 +126,12 @@ export default (state = initialState, action) => {
           return machine.work_volume < +action.value
         })
       }
-    case SET_INITIAL_STATE: {
-      if (state.filter.length) {
-        action.storeFrome.stern_machines = action.storeFrome.stern_machines.filter(machine => {
-          return machine.brand.includes(state.filter)
-        })
-      }
-      return {
-        ...state, ...action.storeFrome, filter: state.filter
-      }
+    case ADD_MACHINE: {
+      state.stern_machines.splice(state.stern_machines.length, 0, action.machine)
+      const muttedState = { ...state }
+      console.log(muttedState)
+      return { ...state, stern_machines: muttedState.stern_machines}
     }
-
     case FILTER_DROP:
       return { ...initialState }
     default:

@@ -3,7 +3,7 @@
 class Table {
   constructor() {
     this.inputFilterMark = $('[placeholder="марка"]')
-    this.tableTextContent = $('.table.text-center').$$('.active.brand')
+    this.tableTextContent = $('.table.text-center').$$('tr')
     this.submitFilter = $('.btn.btn-default')
   }
 
@@ -19,7 +19,13 @@ class Table {
   }
 
   async getTablMarks() {
-    return await this.tableTextContent.map((mark) => mark.getText())
+    await this.tableTextContent.map((mark) => {
+      mark.click()
+      const text = $('.modal_content.p').getText()
+      $('.modal .btn').click()
+      return text
+    })
+
   }
 }
 

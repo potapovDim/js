@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { filterName, filterVolume, filterPrice, filterDrop, setState } from '../reducer/index'
+import { filterName, filterVolume, filterPrice, filterDrop, addMachine } from '../reducer/index'
 
 import { Modal } from './modal'
 
@@ -40,14 +40,8 @@ class SternMachineTable extends React.Component {
     for (const prop in machine) {
       if (machine[prop].length < 1) return
     }
-
-    fetch('http://localhost:8085/', {
-      node: 'no-cors',
-      method: "POST",
-      body: JSON.stringify(machine)
-    }).then(resp => resp.json()).then((parsedData) => {
-      dispatch(setState(parsedData))
-    })
+    console.log(machine)
+    dispatch(addMachine({ machine }))
   }
 
   initFilter = () => {
@@ -102,9 +96,10 @@ class SternMachineTable extends React.Component {
 
   render() {
     const { currendItem } = this.state
-    console.l
+
     const { renderItem } = this
     let { stern_machines } = this.props
+
     let table = stern_machines.map(function (item, index) {
       return (
         <tr key={index} onClick={renderItem(item)}>

@@ -40,4 +40,4 @@ function ReactChangeEvent(node, expectedValue) {
 }
 
 
-module.exports = ReactChangeEvent
+// module.exports = ReactChangeEvent
