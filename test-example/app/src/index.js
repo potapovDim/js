@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { filterName, filterVolume, filterPrice, filterDrop, addMachine } from '../reducer/index'
+import { filterName, filterVolume, filterPrice, filterDrop, addMachine, removeMachine } from '../reducer/index'
 
 import { Modal } from './modal'
 
@@ -94,12 +94,17 @@ class SternMachineTable extends React.Component {
     })
   }
 
+  handleRemoveData = () => {
+    const { dispatch } = this.props
+    dispatch(removeMachine())
+  }
+
   render() {
     const { currendItem } = this.state
 
     const { renderItem } = this
     let { stern_machines } = this.props
-
+    console.log(stern_machines, '@#P@!O#IPO!@P#I@!PI#P@!')
     let table = stern_machines.map(function (item, index) {
       return (
         <tr key={index} onClick={renderItem(item)}>
@@ -160,8 +165,8 @@ class SternMachineTable extends React.Component {
             </tr>
           </thead>
         </table>
-        <button onClick={this.handleCollectData}>Додати</button>
-        <button onClick={this.handleRemoveData}>Видалити</button>
+        <button className="btn btn-success" onClick={this.handleCollectData}>Додати</button>
+        <button className="btn btn-warning" onClick={this.handleRemoveData}>Видалити</button>
       </div>
     )
   }

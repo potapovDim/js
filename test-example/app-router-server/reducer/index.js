@@ -48,6 +48,26 @@ export function pingToken(token) {
   }
 }
 
+export function removeItem(token) {
+  return function (dispatch) {
+    return fetch('http://localhost:9999/remove', {
+      method: "POST",
+      body: JSON.stringify({ token: localStorage.getItem('token') })
+      // mode: 'no-cors'
+    }).then(resp => resp.json()).then(parsedData => {
+      console.log(parsedData)
+      if (parsedData.valid) {
+        dispatch(login({ name: parsedData.name, stern_machines: parsedData.stern_machines }))
+        return true
+      } else {
+        dispatch(logout())
+        return false
+      }
+    })
+  }
+}
+
+
 export function serverLogin(name, password) {
   return function (dispatch) {
     return fetch('http://localhost:9999/login', {

@@ -6,16 +6,20 @@
   "scripts": {
     "start": "NODE_ENV=base webpack-dev-server --hot",
     "start:server": "NODE_ENV=server webpack-dev-server --hot",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-server": "nodemon ./server/index.js",
+    "start-test-server": "nodemon ./test-server/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bunyan": "^1.8.12",
+    "nodemon": "^1.14.10",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
     "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {

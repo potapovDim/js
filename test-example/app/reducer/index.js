@@ -98,12 +98,15 @@ const FILTER_VOLUME = 'FILTER_VOLUME'
 const FILTER_PRICE = 'FILTER_PRICE'
 const FILTER_DROP = 'FILTER_DROP'
 const ADD_MACHINE = 'ADD_MACHINE'
+const REMOVE_MACHINE = 'REMOVE_MACHINE'
+
 
 export const filterName = ({ value }) => ({ type: FILTER_NAME, value })
 export const filterVolume = ({ value }) => ({ type: FILTER_VOLUME, value })
 export const filterPrice = ({ value }) => ({ type: FILTER_PRICE, value })
 export const filterDrop = () => ({ type: FILTER_DROP })
 export const addMachine = ({ machine }) => ({ type: ADD_MACHINE, machine })
+export const removeMachine = () => ({ type: REMOVE_MACHINE })
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -127,10 +130,14 @@ export default (state = initialState, action) => {
         })
       }
     case ADD_MACHINE: {
-      state.stern_machines.splice(state.stern_machines.length, 0, action.machine)
-      const muttedState = { ...state }
-      console.log(muttedState)
-      return { ...state, stern_machines: muttedState.stern_machines}
+      const stern_machinesMod = state.stern_machines.map(a => a)
+      stern_machinesMod.splice(state.stern_machines.length, 0, action.machine)
+      return { ...state, stern_machines: stern_machinesMod }
+    }
+    case REMOVE_MACHINE: {
+      const stern_machinesMod = state.stern_machines.map(a => a)
+      stern_machinesMod.splice(state.stern_machines.length - 1, 1)
+      return { ...state, stern_machines: stern_machinesMod }
     }
     case FILTER_DROP:
       return { ...initialState }

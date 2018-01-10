@@ -39,12 +39,32 @@ describe('Base table test ', () => {
     }
   })
 
-  it('combineDataOneField', async () => {
+  it('resize element', async () => {
+    const resizeArray = await table.resizeFilterButton()
+    expect(resizeArray[0]).to.includes('100')
+  })
+
+  it.skip('combineDataOneField', async () => {
     const modalData = await table.combineDataOneField()
     const tableRowData = await table.combineDataOneFieldTable()
     expect(modalData.length).to.eql(tableRowData.length)
     for (let i = 0; i < modalData.length; i++) {
       expect(modalData[i]).to.eql(tableRowData[i])
     }
+  })
+
+  it('add machine', async () => {
+    const machine = {
+      price: '1200',
+      mass: '10',
+      power: '1.4',
+      length: '6.4',
+      width: '2.5',
+      mark: 'SUPER TEST MIX 1',
+      volume: '5.6'
+    }
+    await table.addNewMachine(machine)
+    await browser.sleep(3000)
+    console.log(await table.getTableCount())
   })
 })

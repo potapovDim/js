@@ -191,27 +191,28 @@ server = http.createServer(function (req, res) {
             res.write(JSON.stringify({ valid: true, ...initialState }))
             break
           }
-
         }
 
-        // case '/resourses': {
-        //   const { token } = JSON.parse(requestBody)
-        //   if (!token) {
-        //     res.writeHead(401)
-        //     res.write(JSON.stringify({ unauthorized: true }))
-        //     break
-        //   }
-        //   const [{ expired }] = tokens.filter(tok => tok.token === token)
-        //   if (expired > +Date.now()) {
-        //     res.writeHead(200)
-        //     res.write(JSON.stringify({ ...initialState }))
-        //     break
-        //   } else {
-        //     res.writeHead(404)
-        //     res.write(JSON.stringify({ tokenErro: 'token expired' }))
-        //     break
-        //   }
-        // }
+        case '/remove': {
+          const { token } = JSON.parse(requestBody)
+          if (!token || !tokens.length) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ unauthorized: true }))
+            break
+          }
+          const [{ expired }] = tokens.filter(tok => tok.token === token)
+          if (expired < +Date.now()) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ tokenErro: 'token expired' }))
+            tokens = tokens.filter(tok => tok.token != token)
+            break
+          } else {
+            initialState.stern_machines.splice(initialState.stern_machines.length - 1, 1)
+            res.writeHead(201)
+            res.write(JSON.stringify({ valid: true, ...initialState }))
+            break
+          }
+        }
 
         default: {
           res.writeHead(201)

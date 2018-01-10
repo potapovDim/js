@@ -8,7 +8,8 @@ import {
   filterDrop,
   setState,
   pingToken,
-  serverAddMachine
+  serverAddMachine,
+  removeItem
 } from '../reducer/index'
 
 import { withRouter, Redirect } from 'react-router-dom'
@@ -123,6 +124,11 @@ export const Tables = withRouter(connect(state => {
     })
   }
 
+  removeMacine = () => {
+    const { dispatch } = this.props
+    dispatch(removeItem())
+  }
+
   render() {
 
     const { currendItem, redirect, load } = this.state
@@ -197,8 +203,8 @@ export const Tables = withRouter(connect(state => {
             </tr>
           </thead>
         </table>
-        <button onClick={this.handleCollectData}>Додати</button>
-        <button onClick={this.handleRemoveData}>Видалити</button>
+        <button className="btn btn-success" onClick={this.handleCollectData}>Додати</button>
+        <button className="btn btn-warning" onClick={this.removeMacine}>Видалити</button>
       </div >
     )
   }
