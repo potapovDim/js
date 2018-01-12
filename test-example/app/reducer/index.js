@@ -99,7 +99,8 @@ const FILTER_PRICE = 'FILTER_PRICE'
 const FILTER_DROP = 'FILTER_DROP'
 const ADD_MACHINE = 'ADD_MACHINE'
 const REMOVE_MACHINE = 'REMOVE_MACHINE'
-
+const SORT_PRICE_LOW = 'SORT_PRICE_LOW'
+const SORT_PRICE_HIGHT = 'SORT_PRICE_HIGHT'
 
 export const filterName = ({ value }) => ({ type: FILTER_NAME, value })
 export const filterVolume = ({ value }) => ({ type: FILTER_VOLUME, value })
@@ -107,6 +108,9 @@ export const filterPrice = ({ value }) => ({ type: FILTER_PRICE, value })
 export const filterDrop = () => ({ type: FILTER_DROP })
 export const addMachine = ({ machine }) => ({ type: ADD_MACHINE, machine })
 export const removeMachine = () => ({ type: REMOVE_MACHINE })
+export const sortPriceFormLow = () => ({ type: SORT_PRICE_LOW })
+export const sortPriceFormHight = () => ({ type: SORT_PRICE_HIGHT })
+
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -138,6 +142,39 @@ export default (state = initialState, action) => {
       const stern_machinesMod = state.stern_machines.map(a => a)
       stern_machinesMod.splice(state.stern_machines.length - 1, 1)
       return { ...state, stern_machines: stern_machinesMod }
+    }
+    case SORT_PRICE_HIGHT: {
+      state.stern_machines = ((arr) => {
+        const n = arr.length
+        for (let i = 0; i < n - 1; i++) {
+          for (let j = 0; j < n - 1 - i; j++) {
+            if (+arr[j + 1].price < +arr[j].price) {
+              const t = arr[j + 1]
+              arr[j + 1] = arr[j]
+              arr[j] = t;
+            }
+          }
+        }
+        return arr
+      })(state.stern_machines)
+      return { ...state, stern_machines: state.stern_machines.map(a => a) }
+    }
+    case SORT_PRICE_LOW: {
+      state.stern_machines = ((arr) => {
+        const n = arr.length
+        for (let i = 0; i < n - 1; i++) {
+          for (let j = 0; j < n - 1 - i; j++) {
+            if (+arr[j + 1].price > +arr[j].price) {
+              const t = arr[j + 1]
+              arr[j + 1] = arr[j]
+              arr[j] = t;
+            }
+          }
+        }
+        return arr
+      })(state.stern_machines)
+
+      return { ...state, stern_machines: state.stern_machines.map(a => a) }
     }
     case FILTER_DROP:
       return { ...initialState }

@@ -1,7 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { filterName, filterVolume, filterPrice, filterDrop, addMachine, removeMachine } from '../reducer/index'
+import {
+  filterName,
+  filterVolume,
+  filterPrice,
+  filterDrop,
+  addMachine,
+  removeMachine,
+  sortPriceFormHight,
+  sortPriceFormLow
+} from '../reducer/index'
 
 import { Modal } from './modal'
 
@@ -133,6 +142,20 @@ class SternMachineTable extends React.Component {
           </tbody>
         </table >
         <button className="btn btn-default" onClick={this.initFilter} style={{ width: '100px' }} onMouseDown={this.startRezieFilterButton}>Фільтрувати</button>
+        <br></br>
+        <h3>Сортування за ціною</h3>
+        <br></br>
+        <div className="btn-group" role="group" aria-label="Basic example">
+          <button type="button" className="btn btn-default" onClick={() => {
+            const { dispatch } = this.props
+            dispatch(sortPriceFormHight())
+          }}>З меншого до більшого</button>
+          <button type="button" className="btn btn-default" onClick={() => {
+            const { dispatch } = this.props
+            dispatch(ortPriceFormLow())
+          }}>З більшого до меншого</button>
+        </div>
+
         <h3 className="text-center">Основні показники машин для роздавання кормів</h3>
         <table style={{ width: '100%' }} className="table-bordered text-center">
           <thead>

@@ -9,7 +9,9 @@ import {
   setState,
   pingToken,
   serverAddMachine,
-  removeItem
+  removeItem,
+  sortPriceFormHight,
+  sortPriceFormLow
 } from '../reducer/index'
 
 import { withRouter, Redirect } from 'react-router-dom'
@@ -159,6 +161,19 @@ export const Tables = withRouter(connect(state => {
           </tbody>
         </table >
         <button className="btn btn-default" onClick={this.initFilter} style={{ width: '100px' }} onMouseDown={this.startRezieFilterButton}>Фільтрувати</button>
+        <br></br>
+        <h3>Сортування за ціною</h3>
+        <br></br>
+        <div className="btn-group" role="group" aria-label="Basic example">
+          <button type="button" className="btn btn-default" onClick={() => {
+            const { dispatch } = this.props
+            dispatch(sortPriceFormHight())
+          }}>З меншого до більшого</button>
+          <button type="button" className="btn btn-default" onClick={() => {
+            const { dispatch } = this.props
+            dispatch(sortPriceFormLow())
+          }}>З більшого до меншого</button>
+        </div>
         <h3 className="text-center">Основні показники машин для роздавання кормів</h3>
         <table style={{ width: '100%' }} className="table-bordered text-center">
           <thead>

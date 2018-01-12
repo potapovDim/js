@@ -155,6 +155,11 @@ server = http.createServer(function (req, res) {
             res.write(JSON.stringify({ unauthorized: true }))
             break
           }
+          if (!token || !tokens.length) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ unauthorized: true }))
+            break
+          }
           const [{ expired }] = tokens.filter(tok => tok.token === token)
           if (expired > +Date.now()) {
             res.writeHead(200)

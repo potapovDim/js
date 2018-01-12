@@ -25,6 +25,12 @@ function waitDomState(conditionFn, time) {
   })
 }
 
+const getPrices = () => {
+  return [].map.call(document.querySelector('.active.price'), (price) => price.innerText)
+}
+
+
+
 const requestsArr = []
 
 const serverConnect = async (data) => {

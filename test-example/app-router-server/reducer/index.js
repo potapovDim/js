@@ -10,6 +10,9 @@ const FAIL_LOGIN = 'FAIL_LOGIN'
 const LOGOUT = 'LOGOUT'
 const ADD_MACHINE = 'ADD_MACHINE'
 
+const SORT_PRICE_LOW = 'SORT_PRICE_LOW'
+const SORT_PRICE_HIGHT = 'SORT_PRICE_HIGHT'
+
 let initialState = { loggedIn: false }
 
 export const filterName = ({ value }) => ({ type: FILTER_NAME, value })
@@ -27,6 +30,10 @@ export const failLogin = (name) => ({ type: FAIL_LOGIN, name })
 export const logout = () => ({ type: LOGOUT })
 
 export const addMachine = ({ stern_machines }) => ({ type: ADD_MACHINE, stern_machines })
+
+export const sortPriceFormLow = () => ({ type: SORT_PRICE_LOW })
+
+export const sortPriceFormHight = () => ({ type: SORT_PRICE_HIGHT })
 
 export function pingToken(token) {
   console.log(token)
@@ -155,6 +162,39 @@ export default (state = {}, action) => {
     }
     case ADD_MACHINE: {
       return { ...state, stern_machines: action.stern_machines }
+    }
+    case SORT_PRICE_HIGHT: {
+      state.stern_machines = ((arr) => {
+        const n = arr.length
+        for (let i = 0; i < n - 1; i++) {
+          for (let j = 0; j < n - 1 - i; j++) {
+            if (+arr[j + 1].price < +arr[j].price) {
+              const t = arr[j + 1]
+              arr[j + 1] = arr[j]
+              arr[j] = t;
+            }
+          }
+        }
+        return arr
+      })(state.stern_machines)
+      return { ...state, stern_machines: state.stern_machines.map(a => a) }
+    }
+    case SORT_PRICE_LOW: {
+      state.stern_machines = ((arr) => {
+        const n = arr.length
+        for (let i = 0; i < n - 1; i++) {
+          for (let j = 0; j < n - 1 - i; j++) {
+            if (+arr[j + 1].price > +arr[j].price) {
+              const t = arr[j + 1]
+              arr[j + 1] = arr[j]
+              arr[j] = t;
+            }
+          }
+        }
+        return arr
+      })(state.stern_machines)
+
+      return { ...state, stern_machines: state.stern_machines.map(a => a) }
     }
     case FILTER_DROP: {
       return { ...initialState }

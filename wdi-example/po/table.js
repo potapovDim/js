@@ -32,7 +32,9 @@ class Table {
   constructor() {
     this.inputFilterMark = element('[placeholder="марка"]')
     this.tableTextContent = element('.table.text-center').getElements('.active.brand')
+    this.tableTextPrice = element('.table.text-center').getElements('.active.price')
     this.submitFilter = element('.btn.btn-default')
+    this.sortGroupButtons = element('.btn-group').getElements('button.btn')
 
     this.submitAddButton = element('.btn.btn-success')
 
@@ -125,6 +127,19 @@ class Table {
       await this[key].sendKeys(dataObj[key])
     }
     await this.submitAddButton.click()
+  }
+
+  filterFrom() {
+    const self = this
+    return {
+      fromLowToHight: async () => await (await self.sortGroupButtons.get(0)).click(),
+      fromHightToLow: async () => await (await self.sortGroupButtons.get(1)).click()
+    }
+  }
+
+  async getPriceList() {
+    const prices = await this.tableTextPrice.map(async (el) => await el.getText())
+    return prices
   }
 }
 
