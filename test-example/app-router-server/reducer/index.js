@@ -36,14 +36,12 @@ export const sortPriceFormLow = () => ({ type: SORT_PRICE_LOW })
 export const sortPriceFormHight = () => ({ type: SORT_PRICE_HIGHT })
 
 export function pingToken(token) {
-  console.log(token)
   return function (dispatch) {
     return fetch('http://localhost:9999/pingtoken', {
       method: "POST",
       body: JSON.stringify({ token })
       // mode: 'no-cors'
     }).then(resp => resp.json()).then(parsedData => {
-      console.log(parsedData)
       if (parsedData.valid) {
         dispatch(login({ name: parsedData.name, stern_machines: parsedData.stern_machines }))
         return true
@@ -62,7 +60,6 @@ export function removeItem(token) {
       body: JSON.stringify({ token: localStorage.getItem('token') })
       // mode: 'no-cors'
     }).then(resp => resp.json()).then(parsedData => {
-      console.log(parsedData)
       if (parsedData.valid) {
         dispatch(login({ name: parsedData.name, stern_machines: parsedData.stern_machines }))
         return true
@@ -74,14 +71,16 @@ export function removeItem(token) {
   }
 }
 
-
 export function serverLogin(name, password) {
+  console.log('dsadjsajdalskj')
   return function (dispatch) {
     return fetch('http://localhost:9999/login', {
       // mode: 'no-cors',
       method: "POST",
       body: JSON.stringify({ name, password })
-    }).then(resp => resp.json()).then(parsedData => {
+    }).then(resp => {
+      return resp.json()
+    }).then(parsedData => {
       if (parsedData.token) {
         dispatch(login({ name, stern_machines: parsedData.stern_machines }))
         localStorage.setItem('token', parsedData.token)
@@ -115,7 +114,6 @@ export function serverAddMachine(machine) {
       method: "POST",
       body: JSON.stringify({ token: localStorage.getItem('token'), machine })
     }).then(resp => resp.json()).then(parsedData => {
-      console.log('SJHDHGAJSDGJAGHSJDGJHAJSDGJASJGD', parsedData)
       if (parsedData.stern_machines) {
         dispatch(addMachine({ stern_machines: parsedData.stern_machines }))
         return true
@@ -129,6 +127,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case LOGIN: {
       initialState = { ...initialState, name: action.name, stern_machines: action.stern_machines }
+      console.log(action.name, 'action name')
       return { ...state, name: action.name, stern_machines: action.stern_machines }
     }
     case FILTER_NAME: {

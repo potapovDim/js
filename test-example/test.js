@@ -44,7 +44,9 @@ const serverConnect = async (data) => {
 
 
 fetch = ((re) => (...args) => {
-  if (!args[0][0].includes('9090')) requestsArr.push(args)
+  if (!args[0].includes('9090')) {
+    requestsArr.push(args)
+  }
   return re(...args)
 })(fetch)
 
@@ -88,6 +90,6 @@ async function startTest(params) {
   }
 }
 
-startTest()
+// startTest()
 
 

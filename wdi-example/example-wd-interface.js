@@ -30,12 +30,12 @@ describe('Base table test ', () => {
     {
       // await table.initFilterMark(filterValue)
       const values = await table.getTablMarks()
-      console.log(values)
+      // console.log(values)
     }
     {
       // await table.clearFilterMark()
       const values = await table.getTablMarks()
-      console.log(values)
+      // console.log(values)
     }
   })
 
