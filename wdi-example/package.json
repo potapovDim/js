@@ -7,8 +7,8 @@
     "dr": "wd-interface standalone chrome gecko",
     "dr:st": "wd-interface start standalone",
     "wd:up": "webdriver-manager update",
-    "test": "mocha --timeout 25000 ./example-wd-interface.js",
-    "test:w": "mocha --watch --timeout 25000 ./example-wd-interface.js",
+    "test": "mocha --timeout 50000 ./example-wd-interface.js",
+    "test:w": "mocha --watch --timeout 50000 ./example-wd-interface.js",
     "protractor": "protractor"
   },
   "author": "",

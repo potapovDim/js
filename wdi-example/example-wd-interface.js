@@ -44,7 +44,7 @@ describe('Base table test ', () => {
     expect(resizeArray[0]).to.includes('100')
   })
 
-  it.skip('combineDataOneField', async () => {
+  it('combineDataOneField', async () => {
     const modalData = await table.combineDataOneField()
     const tableRowData = await table.combineDataOneFieldTable()
     expect(modalData.length).to.eql(tableRowData.length)

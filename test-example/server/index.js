@@ -160,12 +160,17 @@ server = http.createServer(function (req, res) {
             res.write(JSON.stringify({ unauthorized: true }))
             break
           }
-          const [{ expired, name }] = tokens.filter(tok => tok.token === token)
-          console.log(name, '!!!!!!!!!!');
-          
+          const filtredToken = tokens.filter(tok => tok.token === token)
+          if (!filtredToken.length) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ unauthorized: true }))
+            break
+          }
+          const [{ expired, name }] = filtredToken
+
           if (expired > +Date.now()) {
             res.writeHead(200)
-            res.write(JSON.stringify({ valid: true, ...initialState, name}))
+            res.write(JSON.stringify({ valid: true, ...initialState, name }))
             break
           } else {
             res.writeHead(404)
