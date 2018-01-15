@@ -7,6 +7,9 @@ const errors = {
   }
 }
 
+const frontEntErrors = []
+
+
 const specs = {
   login: {
     username: 'test1',
@@ -40,11 +43,16 @@ server = http.createServer(function (req, res) {
     req.on('data', (chunk) => {
       requestBody += chunk.toString()
     }).on('end', () => {
-      const { readyTo } = JSON.parse(requestBody)
-      console.log(readyTo === 'login', readyTo, 'login', '!!!!!!!', { spec: specs['login'] }, specs[readyTo])
-      res.writeHead(200)
-      res.write(JSON.stringify({ spec: specs[readyTo], run: true }))
-      res.end()
+      const { readyTo, error } = JSON.parse(requestBody)
+      if (error) {
+
+      }
+      else {
+        res.writeHead(200)
+        res.write(JSON.stringify({ spec: specs[readyTo], run: true }))
+        res.end()
+      }
+
     })
   }
 

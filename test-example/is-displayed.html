@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./is-displayed.js"></script>
+</head>
+
+<body>
+  <button class="display-none" style="display:none" onclick="shouldNotBeClicable()">Button does not display</button>
+  <button class="display-block" style="display:block" onclick="clicker()"> Button is displayed</button>
+  <script>
+    function clicker() {
+      console.log('CLICK BLOCK BUTTON')
+    }
+    function shouldNotBeClicable() {
+      console.log('SHOULD NOT BE CLICKABLE')
+    }
+  </script>
+</body>
+
+</html>
