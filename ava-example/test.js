@@ -12,8 +12,6 @@ test.after.always('tears down', async () => {
   await browser.closeBrowser()
 })
 
-
-
 test('super tests', async t => {
   const initialMarks = await browser.executeScript(function () {
     return [].map.call(document.querySelectorAll('.active.brand'), (doc) => {

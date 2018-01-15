@@ -44,7 +44,48 @@ describe('Base table test ', () => {
     expect(resizeArray[0]).to.includes('100')
   })
 
-  it('combineDataOneField', async () => {
+  it('combine data form table and from modal scrip ', async () => {
+    const modalData = await browser.executeScript(function () {
+
+      return [].map.call(document.querySelectorAll('tbody')[1].querySelectorAll('tr'), (tableNode) => {
+        tableNode.click()
+
+        const dataObj = {
+          price: document.querySelectorAll('.modal_content.p')[0].innerText,
+          mass: document.querySelectorAll('.modal_content.p')[1].innerText,
+          power: document.querySelectorAll('.modal_content.p')[2].innerText,
+          length: document.querySelectorAll('.modal_content.p')[3].innerText,
+          width: document.querySelectorAll('.modal_content.p')[4].innerText,
+          mark: document.querySelectorAll('.modal_content.p')[5].innerText,
+          volume: document.querySelectorAll('.modal_content.p')[6].innerText,
+        }
+        document.querySelector('.modal .btn').click()
+        return dataObj
+      })
+    })
+
+    const tableRowData = await browser.executeScript(function () {
+      return [].map.call(document.querySelectorAll('tbody')[1].querySelectorAll('tr'), (tableNode) => {
+
+        const dataObj = {
+          price: tableNode.querySelectorAll('.active')[0].innerText,
+          mass: tableNode.querySelectorAll('.active')[1].innerText,
+          power: tableNode.querySelectorAll('.active')[2].innerText,
+          length: tableNode.querySelectorAll('.active')[3].innerText,
+          width: tableNode.querySelectorAll('.active')[4].innerText,
+          mark: tableNode.querySelectorAll('.active')[5].innerText,
+          volume: tableNode.querySelectorAll('.active')[6].innerText,
+        }
+        return dataObj
+      })
+    })
+    console.log(tableRowData)
+    for (let i = 0; i < modalData.length; i++) {
+      expect(modalData[i]).to.eql(tableRowData[i])
+    }
+  })
+
+  it('combine data form table and from modal', async () => {
     const modalData = await table.combineDataOneField()
     const tableRowData = await table.combineDataOneFieldTable()
     expect(modalData.length).to.eql(tableRowData.length)
@@ -72,8 +113,11 @@ describe('Base table test ', () => {
 
   it('sort prices', async () => {
     const pricesBeforeSort = await table.getPriceList()
+
     await table.filterFrom().fromLowToHight()
+
     const pricesAfterSortToHight = await table.getPriceList()
+
     expect(pricesAfterSortToHight).to.not.eql(pricesBeforeSort)
 
     for (let j = 0; j < pricesAfterSortToHight.length - 1 - 1; j++) {
@@ -81,6 +125,7 @@ describe('Base table test ', () => {
     }
 
     await table.filterFrom().fromHightToLow()
+
     const pricesAfterSortToLow = await table.getPriceList()
 
     for (let j = 0; j < pricesAfterSortToLow.length - 1 - 1; j++) {

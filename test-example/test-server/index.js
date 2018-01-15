@@ -1,19 +1,25 @@
 const http = require('http')
 let server
 
+const errors = {
+  machine_add_error: {
+    stack: 'Machine adding was broken'
+  }
+}
+
 const specs = {
   login: {
     username: 'test1',
     password: 'test2'
   },
   submit_machine: {
-    price: '1200',
-    mass: '10',
-    power: '1.4',
-    length: '6.4',
-    width: '2.5',
-    mark: 'SUPER TEST MIX 1',
-    volume: '5.6'
+    price: 'TEST PRICE',
+    mass: 'TEST MASS',
+    power: 'TEST POWER',
+    length: 'TEST LENGTH',
+    width: 'TEST WIDTH',
+    mark: 'TEST MARK',
+    volume: 'TEST VOLUME'
   }
 }
 
