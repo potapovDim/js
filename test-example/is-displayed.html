@@ -12,12 +12,24 @@
 <body>
   <button class="display-none" style="display:none" onclick="shouldNotBeClicable()">Button does not display</button>
   <button class="display-block" style="display:block" onclick="clicker()"> Button is displayed</button>
+  <button id="test">Test</button>
+  <a href="javascript:window.open('','_self').close();">close</a>
+
   <script>
     function clicker() {
       console.log('CLICK BLOCK BUTTON')
     }
     function shouldNotBeClicable() {
       console.log('SHOULD NOT BE CLICKABLE')
+    }
+    document.getElementById("test").addEventListener("click", openNewBackgroundTab, false);
+
+    function openNewBackgroundTab() {
+      var a = document.createElement("a");
+      a.href = "http://www.google.com/";
+      var evt = document.createEvent("MouseEvents");
+      evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
+      a.dispatchEvent(evt);
     }
   </script>
 </body>
