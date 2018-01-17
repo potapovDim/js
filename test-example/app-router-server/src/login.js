@@ -28,6 +28,7 @@ export const Login = withRouter(connect(state => state)(class extends React.Comp
   }
 
   handleInput = (field) => ({ target: { value } }) => {
+    console.log('HERE')
     this.setState({
       [field]: value
     })

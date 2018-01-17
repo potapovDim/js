@@ -26,66 +26,7 @@ describe('Base table test ', () => {
     table = await loginPage.login('test', 'test')
   })
 
-  it('filter fields', async () => {
-    {
-      // await table.initFilterMark(filterValue)
-      const values = await table.getTablMarks()
-      // console.log(values)
-    }
-    {
-      // await table.clearFilterMark()
-      const values = await table.getTablMarks()
-      // console.log(values)
-    }
-  })
-
-  it('resize element', async () => {
-    const resizeArray = await table.resizeFilterButton()
-    expect(resizeArray[0]).to.includes('100')
-  })
-
-  it('combine data form table and from modal scrip ', async () => {
-    const modalData = await browser.executeScript(function () {
-
-      return [].map.call(document.querySelectorAll('tbody')[1].querySelectorAll('tr'), (tableNode) => {
-        tableNode.click()
-
-        const dataObj = {
-          price: document.querySelectorAll('.modal_content.p')[0].innerText,
-          mass: document.querySelectorAll('.modal_content.p')[1].innerText,
-          power: document.querySelectorAll('.modal_content.p')[2].innerText,
-          length: document.querySelectorAll('.modal_content.p')[3].innerText,
-          width: document.querySelectorAll('.modal_content.p')[4].innerText,
-          mark: document.querySelectorAll('.modal_content.p')[5].innerText,
-          volume: document.querySelectorAll('.modal_content.p')[6].innerText,
-        }
-        document.querySelector('.modal .btn').click()
-        return dataObj
-      })
-    })
-
-    const tableRowData = await browser.executeScript(function () {
-      return [].map.call(document.querySelectorAll('tbody')[1].querySelectorAll('tr'), (tableNode) => {
-
-        const dataObj = {
-          price: tableNode.querySelectorAll('.active')[0].innerText,
-          mass: tableNode.querySelectorAll('.active')[1].innerText,
-          power: tableNode.querySelectorAll('.active')[2].innerText,
-          length: tableNode.querySelectorAll('.active')[3].innerText,
-          width: tableNode.querySelectorAll('.active')[4].innerText,
-          mark: tableNode.querySelectorAll('.active')[5].innerText,
-          volume: tableNode.querySelectorAll('.active')[6].innerText,
-        }
-        return dataObj
-      })
-    })
-    console.log(tableRowData)
-    for (let i = 0; i < modalData.length; i++) {
-      expect(modalData[i]).to.eql(tableRowData[i])
-    }
-  })
-
-  it('combine data form table and from modal', async () => {
+  it.skip('combine data form table and from modal', async () => {
     const modalData = await table.combineDataOneField()
     const tableRowData = await table.combineDataOneFieldTable()
     expect(modalData.length).to.eql(tableRowData.length)
@@ -94,24 +35,7 @@ describe('Base table test ', () => {
     }
   })
 
-  it('add machine', async () => {
-    const tableLengthBefore = await table.getTableCount()
-    const machine = {
-      price: '1200',
-      mass: '10',
-      power: '1.4',
-      length: '6.4',
-      width: '2.5',
-      mark: 'SUPER TEST MIX 1',
-      volume: '5.6'
-    }
-    await table.addNewMachine(machine)
-    const tableLengthAfter = await table.getTableCount()
-    console.log(tableLengthBefore, tableLengthAfter)
-    expect(tableLengthBefore + 1).to.eql(tableLengthAfter)
-  })
-
-  it('sort prices', async () => {
+  it.skip('sort prices', async () => {
     const pricesBeforeSort = await table.getPriceList()
 
     await table.filterFrom().fromLowToHight()
@@ -166,6 +90,46 @@ describe('Base table test ', () => {
 
       return [firstAssert, secondAssert]
     })
-    console.log(results)
+  })
+
+  it('combine data form table and from modal scrip ', async () => {
+  
+    const modalData = await browser.executeScript(function () {
+
+      return [].map.call(document.querySelectorAll('tbody')[1].querySelectorAll('tr'), (tableNode) => {
+        tableNode.click()
+
+        const dataObj = {
+          price: document.querySelectorAll('.modal_content.p')[0].innerText,
+          mass: document.querySelectorAll('.modal_content.p')[1].innerText,
+          power: document.querySelectorAll('.modal_content.p')[2].innerText,
+          length: document.querySelectorAll('.modal_content.p')[3].innerText,
+          width: document.querySelectorAll('.modal_content.p')[4].innerText,
+          mark: document.querySelectorAll('.modal_content.p')[5].innerText,
+          volume: document.querySelectorAll('.modal_content.p')[6].innerText,
+        }
+        document.querySelector('.modal .btn').click()
+        return dataObj
+      })
+    })
+
+    const tableRowData = await browser.executeScript(function () {
+      return [].map.call(document.querySelectorAll('tbody')[1].querySelectorAll('tr'), (tableNode) => {
+
+        const dataObj = {
+          price: tableNode.querySelectorAll('.active')[0].innerText,
+          mass: tableNode.querySelectorAll('.active')[1].innerText,
+          power: tableNode.querySelectorAll('.active')[2].innerText,
+          length: tableNode.querySelectorAll('.active')[3].innerText,
+          width: tableNode.querySelectorAll('.active')[4].innerText,
+          mark: tableNode.querySelectorAll('.active')[5].innerText,
+          volume: tableNode.querySelectorAll('.active')[6].innerText,
+        }
+        return dataObj
+      })
+    })
+    for (let i = 0; i < modalData.length; i++) {
+      expect(modalData[i]).to.eql(tableRowData[i])
+    }
   })
 })

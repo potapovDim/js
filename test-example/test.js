@@ -85,14 +85,20 @@ async function startTest(params) {
         const success = await waitDomState(() => document.querySelectorAll('.active.brand').length > tableLengthBeforAdd)
 
         const tableLengthAfterAdd = document.querySelectorAll('.active.brand').length
-        if (!success) {
-          await serverConnect({ url: window.location.href, error: 'machine_add_error' })
-        }
       }
+    }
+    {
+      const { run, spec } = await serverConnect({ url: window.location.href, readyTo: 'resize_button' })
+      if (run) {
+        const prevWidth = document.querySelector('.btn.btn-default').style.width
+        resizeNode(document.querySelector('.btn.btn-default'), spec)
+        const currentWidth = document.querySelector('.btn.btn-default').style.width 
+        console.log(prevWidth, currentWidth)
+      }
+
+      
     }
   }
 }
 
-// startTest()
-
-
+startTest()

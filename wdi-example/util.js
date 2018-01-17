@@ -53,6 +53,41 @@ describe('Base tablse example', () => {
     await browser.closeBrowser()
   })
 
+  it('filter fields', async () => {
+    {
+      // await table.initFilterMark(filterValue)
+      const values = await table.getTablMarks()
+      // console.log(values)
+    }
+    {
+      // await table.clearFilterMark()
+      const values = await table.getTablMarks()
+      // console.log(values)
+    }
+  })
+
+
+  it('add machine', async () => {
+    const tableLengthBefore = await table.getTableCount()
+    const machine = {
+      price: '1200',
+      mass: '10',
+      power: '1.4',
+      length: '6.4',
+      width: '2.5',
+      mark: 'SUPER TEST MIX 1',
+      volume: '5.6'
+    }
+    await table.addNewMachine(machine)
+    const tableLengthAfter = await table.getTableCount()
+    expect(tableLengthBefore + 1).to.eql(tableLengthAfter)
+  })
+
+  it('resize element', async () => {
+    const resizeArray = await table.resizeFilterButton()
+    expect(resizeArray[0]).to.includes('100')
+  })
+
   it('initial test set data from element', async () => {
 
     await element(price).sendKeys('12000')

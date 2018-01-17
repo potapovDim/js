@@ -16,8 +16,8 @@ function resizeNode(node, { x, y }) {
     1, // detail : Event's mouse click count 
     100, // screenX
     50, // screenY
-    x, // clientX
-    y, // clientY
+    -x, // clientX
+    -y, // clientY
     false, // ctrlKey
     false, // altKey
     false, // shiftKey
