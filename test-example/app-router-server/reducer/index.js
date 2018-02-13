@@ -77,6 +77,9 @@ export function serverLogin(name, password) {
     return fetch('http://localhost:9999/login', {
       // mode: 'no-cors',
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({ name, password })
     }).then(resp => {
       return resp.json()
