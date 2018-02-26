@@ -11,5 +11,6 @@ b.js/node_modules
 wdi-example/node_modules
 wdi-example/package-lock.json
 wdi-example/debug*
+vanilla
 test-example/node_modules
 weblium/node_modules

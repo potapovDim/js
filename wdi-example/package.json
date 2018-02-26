@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "protractor": "^5.2.2",
-    "wd-interface": "0.0.22"
+    "awb": "git+https://github.com/potapovDim/interface-webdriver.git#another-webdriver-binding"
   },
   "devDependencies": {
     "chai": "^4.1.2",

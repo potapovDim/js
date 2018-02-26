@@ -95,9 +95,7 @@ const initialState = {
   ]
 }
 
-
 let tokens = []
-
 
 const tokenGenerator = () => {
   const stringPass = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'

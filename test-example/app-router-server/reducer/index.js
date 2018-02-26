@@ -72,7 +72,6 @@ export function removeItem(token) {
 }
 
 export function serverLogin(name, password) {
-  console.log('dsadjsajdalskj')
   return function (dispatch) {
     return fetch('http://localhost:9999/login', {
       // mode: 'no-cors',
