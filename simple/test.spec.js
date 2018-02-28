@@ -1,6 +1,8 @@
 const { expect } = require('chai')
 
-const { client, element } = require('wd-interface')
+const awb = require('awb')
+
+const { client, element } = awb()
 
 describe('Google base example', () => {
   let browser = null
@@ -16,12 +18,14 @@ describe('Google base example', () => {
   const resultSearch = element(resultsearch)
 
   before(async () => {
-    browser = client().chrome() // for dirrect connection to chromedriver client().chrome(true)
+    browser = client 
+    await browser.startDriver()
     await browser.goTo(baseURL)
   })
 
   after(async () => {
     await browser.closeBrowser()
+    await browser.stopDriver()
   })
 
   it('search git hub potapovDim', async () => {

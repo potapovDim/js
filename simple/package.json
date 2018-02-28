@@ -6,17 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "e2e": "mocha --timeout 10000 $(find ./ -path '*.spec.js')",
-    "install-drivers": "wd-interface standalone chrome gecko",
-    "start-drivers": "wd-interface standalone start"
+    "install-drivers": "awb standalone chrome gecko"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "mocha": "^4.0.1",
-    "node-fetch": "^1.7.3",
-    "wd-interface": "git+https://github.com/potapovDim/interface-webdriver.git#develop"
+    "node-fetch": "^1.7.3"
   },
   "devDependencies": {
+    "awb": "^0.1.9",
     "chai": "^4.1.2"
   }
 }
