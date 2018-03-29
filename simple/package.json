@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.1.2",
     "mocha": "^4.0.1",
     "node-fetch": "^1.7.3"
   },
   "devDependencies": {
-    "awb": "^0.1.9",
-    "chai": "^4.1.2"
+    "awb": "^0.3.2"
   }
 }

@@ -1,4 +1,5 @@
-const { expect } = require('chai');
+const {expect} = require('chai');
+require('mocha')
 
 describe('Add name', () => {
   const input = 'input';
@@ -7,7 +8,7 @@ describe('Add name', () => {
   const addNammeButton = 'button:nth-child(3)';
   beforeEach(() => {
     browser.url('http://localhost:9090');
-    browser.windowHandleSize({ width: 1400, height: 900 });
+    browser.windowHandleSize({width: 1400, height: 900});
   })
   it('Success add name', () => {
     const testValue = 'test 1'
