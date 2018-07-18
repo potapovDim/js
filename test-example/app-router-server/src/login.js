@@ -39,7 +39,6 @@ export const Login = withRouter(connect(state => state)(class extends React.Comp
     const { username, password } = this.state
     !!username && !!password && dispatch(serverLogin(username, password)).then(login => {
       if (login) {
-        console.log(username, password)
         history.push('/table')
       }
     })

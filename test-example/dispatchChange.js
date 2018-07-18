@@ -1,4 +1,4 @@
-function ReactChangeEvent(node, expectedValue) {
+function changeInput(node, expectedValue) {
 
   node.value = expectedValue
   const nodeName = node.nodeName.toLowerCase()

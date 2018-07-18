@@ -1,0 +1,23 @@
+
+{
+  "name": "js-trash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "a.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potapovDim/js-trash.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/potapovDim/js-trash/issues"
+  },
+  "homepage": "https://github.com/potapovDim/js-trash#readme",
+  "devDependencies": {
+    "node-fetch": "^2.1.1"
+  }
+}

@@ -1,0 +1,6 @@
+/Users/potapopweblium/Documents/js-trash/weblium -- абсолютний шлях
+./ - відносний шлях
+../ - на директорію вище
+./node_modules/amd-zip - 
+                в цій директорії/директорія node_modules/директорія amd-zip
+

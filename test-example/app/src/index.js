@@ -152,7 +152,7 @@ class SternMachineTable extends React.Component {
           }}>З меншого до більшого</button>
           <button type="button" className="btn btn-default" onClick={() => {
             const { dispatch } = this.props
-            dispatch(sortPriceFormLow())
+            dispatch(ortPriceFormLow())
           }}>З більшого до меншого</button>
         </div>
 

@@ -30,7 +30,7 @@ const specs = {
   filter_price: {}
 };
 
-server = http.createServer(function(req, res) {
+server = http.createServer(function (req, res) {
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Request-Method", "*");

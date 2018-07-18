@@ -1,6 +1,7 @@
 const http = require('http')
 
 http.request = ((request) => (opts, ...args) => {
+  console.log(opts)
   return request(opts, ...args)
 })(http.request.bind(http.request));
 
@@ -10,7 +11,7 @@ describe('Add name', () => {
   //elements
   const submitFilter = $('.frame-open-button')
 
-
+ 
 
   beforeEach(() => {
     browser.waitForAngularEnabled(false);
@@ -23,8 +24,8 @@ describe('Add name', () => {
       submitFilter.click()
     }
     {
-
-      browser.executeAsyncScript(function(callback) {
+      
+      browser.executeAsyncScript(function (callback) {
         callback(true)
       }).then(a => {
         console.log(a)

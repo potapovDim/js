@@ -67,23 +67,20 @@
     }
 
     function changeInputPassword(event) {
-      console.log('!!!!!!!!!!!!!!!!!!!!!!')
     }
 
     function changeInputName(event) {
       state.setState({ test: event.target.value })
       console.log(state)
     }
-    function initInputs() {
+    function initInputs(element, value) {
       const ev = document.createEvent('HTMLEvents')
       ev.initEvent('change', false, false)
-      const inpTestName = document.querySelector('[placeholder="input test name"]')
-      const inpTesSecondname = document.querySelector('[placeholder="input test secondname"]')
 
-      inpTestName.value = 'test name'
-      inpTesSecondname.value = 'test secondname'
-      inpTestName.dispatchEvent(ev)
-      inpTesSecondname.dispatchEvent(ev)
+
+      element.value = value
+
+      element.dispatchEvent(ev)
     }
     // document.addEventListener('click', (event) => {
     //   const { screenX, screenY, x, y } = event

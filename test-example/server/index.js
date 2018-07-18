@@ -95,7 +95,9 @@ const initialState = {
   ]
 }
 
+
 let tokens = []
+
 
 const tokenGenerator = () => {
   const stringPass = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
@@ -210,7 +212,13 @@ server = http.createServer(function (req, res) {
             res.write(JSON.stringify({ unauthorized: true }))
             break
           }
-          const [{ expired }] = tokens.filter(tok => tok.token === token)
+
+          const data = tokens.filter(tok => tok.token === token)
+          if (!data.length) {
+            res.writeHead(401)
+            res.write(JSON.stringify({ unauthorized: true }))
+          }
+          const [{ expired }] = data
           if (expired < +Date.now()) {
             res.writeHead(401)
             res.write(JSON.stringify({ tokenErro: 'token expired' }))

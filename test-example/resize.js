@@ -8,28 +8,29 @@ function resizeNode(node, { x, y }) {
   const mouseUpEvent = document.createEvent("MouseEvents");
   mouseUpEvent.initMouseEvent("mouseup", true, false, window, 1)
 
+  const mouseDownEvent = document.createEvent("MouseEvents")
   mouseDownEvent.initMouseEvent(
     "mousedown",
     true,
     false,
     window,
-    1, // detail : Event's mouse click count 
+    1, // detail : Event's mouse click count
     100, // screenX
     50, // screenY
-    -x, // clientX
-    -y, // clientY
+    -100, // clientX
+    -100, // clientY
     false, // ctrlKey
     false, // altKey
     false, // shiftKey
-    false, // metaKey 
-    0, // button : 0 = click, 1 = middle button, 2 = right button  
+    false, // metaKey
+    0, // button : 0 = click, 1 = middle button, 2 = right button
     null // relatedTarget : Only used with some event types (e.g. mouseover and mouseout). In other cases, pass null.
   )
   mouseMoveEvent.initMouseEvent(
-    "mousemove", //event type : click, mousedown, mouseup, mouseover, mousemove, mouseout.  
+    "mousemove", //event type : click, mousedown, mouseup, mouseover, mousemove, mouseout.
     true, //canBubble
     false, //cancelable
-    window, //event's AbstractView : should be window 
+    window, //event's AbstractView : should be window
     0, // screenX
     0, // screenY
     0, // clientX
@@ -37,8 +38,8 @@ function resizeNode(node, { x, y }) {
     false, // ctrlKey
     false, // altKey
     false, // shiftKey
-    false, // metaKey 
-    0, // button : 0 = click, 1 = middle button, 2 = right button  
+    false, // metaKey
+    0, // button : 0 = click, 1 = middle button, 2 = right button
     null // relatedTarget : Only used with some event types (e.g. mouseover and mouseout). In other cases, pass null.
   );
   node.dispatchEvent(mouseDownEvent);

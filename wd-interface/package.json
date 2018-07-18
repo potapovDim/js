@@ -1,0 +1,11 @@
+{
+  "name": "wd-interface",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Potapov Dmytro",
+  "license": "MIT",
+  "dependencies": {
+    "awb": "^0.3.4"
+  }
+}
