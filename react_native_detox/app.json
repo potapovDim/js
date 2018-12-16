@@ -1,7 +1,7 @@
 {
-  "name": "JS trash example",
-  "displayName": "JS trash example",
-  "description": "JS trash example",
+  "name": "JS_trash_example",
+  "displayName": "JS_trash_example",
+  "description": "JS_trash_example",
   "privacy": "public",
   "sdkVersion": "25.0.0",
   "platforms": [
